@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(description = "Div Scoreboard", urlPatterns = { "/DivFilter" , "/DivFilter.do"}, initParams = {@WebInitParam(name="id",value="1"),@WebInitParam(name="name",value="pankaj")})
 public class DivFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String HTML_START="<html><body>";
-	public static final String HTML_END="</body></html>";
+	public static final String HTML_START="<html>";
+	public static final String HTML_END="</html>";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,6 +36,10 @@ public class DivFilter extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		processScores s = new processScores();
 		out.println(HTML_START);
+		out.println("<head><meta http-equiv=\"refresh\" content=\"30\"></head>");
+		out.println("<body>");
+		out.println("<h2>Showing Open Division Filtered National Scoreboard as of " +  new Date() + "</h2>");
+		out.println("<hr>");
 		out.println("<table border=\"4\">");
 		ArrayList<String[]> divArray = s.trimDiv();
 		out.println("<tr><th>National Place</th><th>Team Number</th><th>Location/Category</th><th>Division</th><th>Tier</th><th>Score Images</th><th>Play Time (HH:MM)</th><th>Warnings</th><th>CCS Score</th><th>Filtered Place</th></tr>");
@@ -48,6 +52,7 @@ public class DivFilter extends HttpServlet {
 			out.println("</tr>");
 		}
 		out.println("</table>");
+		out.println("</body>");
 		out.println(HTML_END);
 	}
 
