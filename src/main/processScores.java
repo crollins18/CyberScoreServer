@@ -32,6 +32,10 @@ public class processScores {
 		this.getScoreboard();
 	}
 	
+	public String getBase() {
+		return base.substring(base.indexOf("//")+2);
+	}
+	
 	public void getScoreboard() throws FileNotFoundException {
 		Document document = null;
 		try {

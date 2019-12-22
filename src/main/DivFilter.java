@@ -36,11 +36,12 @@ public class DivFilter extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		processScores s = new processScores();
 		out.println(HTML_START);
-		out.println("<head><meta http-equiv=\"refresh\" content=\"30\"></head>");
+		out.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 		out.println("<body>");
 		out.println("<h2>Showing Open Division Filtered National Scoreboard as of " +  new Date() + "</h2>");
+		out.println("<h3>Fetching from " + s.getBase() + "</h3>");
 		out.println("<hr>");
-		out.println("<table border=\"4\">");
+		out.println("<table border=\"4\" class='CSSTableGenerator'>");
 		ArrayList<String[]> divArray = s.trimDiv();
 		out.println("<tr><th>National Place</th><th>Team Number</th><th>Location/Category</th><th>Division</th><th>Tier</th><th>Score Images</th><th>Play Time (HH:MM)</th><th>Warnings</th><th>CCS Score</th><th>Filtered Place</th></tr>");
 
