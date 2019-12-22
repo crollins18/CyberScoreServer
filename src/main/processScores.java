@@ -15,12 +15,16 @@ public class processScores {
 	
 	private Scanner in;
 	private String base;
+	private String extended;
 	private String id;
 	private String state;
 	private String div;
 	private String[][] copiedArray;
 	private ArrayList<String[]> stateArray;
 	private ArrayList<String[]> divArray;
+	private ArrayList<String[]> teamStats;
+	private ArrayList<String[]> teamImages;
+
 
 	
 	public processScores() throws FileNotFoundException {
@@ -35,6 +39,57 @@ public class processScores {
 	public String getBase() {
 		return base.substring(base.indexOf("//")+2);
 	}
+	
+	public ArrayList<String[]> getTeamboard(String teamID) {
+		extended = base + "team.php?team=" + teamID;
+		Document document = null;
+		try {
+			document = Jsoup.connect(extended).get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		teamImages = new ArrayList<String[]>();
+		
+		for (Element row : document.select("table.CSSTableGenerator:nth-of-type(1) tr")) {
+			
+			String[] stats = new String[9];
+			stats[0] = row.select("td:nth-of-type(1)").text();
+			stats[1] = row.select("td:nth-of-type(2)").text();
+			stats[2] = row.select("td:nth-of-type(3)").text();
+			stats[3] = row.select("td:nth-of-type(4)").text();
+			stats[4] = row.select("td:nth-of-type(5)").text();
+			stats[5] = row.select("td:nth-of-type(6)").text();
+			stats[6] = row.select("td:nth-of-type(7)").text();
+			stats[7] = row.select("td:nth-of-type(8)").text();
+			stats[8] = row.select("td:nth-of-type(9)").text();
+
+
+			teamImages.add(stats);
+		}	
+		
+		for (Element row : document.select("table.CSSTableGenerator:nth-of-type(2) tr")) {
+			
+			String[] imgArray = new String[7];
+			String img = row.select("td:nth-of-type(1)").text();
+			imgArray[0] = img;
+			String time = row.select("td:nth-of-type(2)").text();
+			imgArray[1] = time;
+			String found = row.select("td:nth-of-type(3)").text();
+			imgArray[2] = found;
+			String remain = row.select("td:nth-of-type(4)").text();
+			imgArray[3] = remain;
+			String pen = row.select("td:nth-of-type(5)").text();
+			imgArray[4] = pen;
+			String score = row.select("td:nth-of-type(6)").text();
+			imgArray[5] = score;
+			String warn = row.select("td:nth-of-type(7)").text();
+			imgArray[6] = warn;
+			teamImages.add(imgArray);
+		}	
+		return teamImages;
+	}
+		
 	
 	public void getScoreboard() throws FileNotFoundException {
 		Document document = null;
@@ -121,6 +176,19 @@ public class processScores {
 	public static void main(String[] args) {
 		try {
 			processScores s = new processScores();
+			ArrayList<String[]> temp = s.getTeamboard("12-0169");
+			for(int r=0; r<2; r++) {
+				for(int c=0; c<temp.get(0).length; c++) {
+					System.out.print(temp.get(r)[c] + "\t");
+				}
+				System.out.println();
+			}
+			for(int r=2; r<temp.size(); r++) {
+				for(int c=0; c<temp.get(2).length; c++) {
+					System.out.print(temp.get(r)[c] + "\t");
+				}
+				System.out.println();
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

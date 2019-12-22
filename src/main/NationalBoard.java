@@ -43,7 +43,7 @@ public class NationalBoard extends HttpServlet {
 		out.println("<hr>");
 		out.println("<table border=\"4\" class='CSSTableGenerator'>");
 		String[][] tempArr = s.getArray();
-		out.println("<tr><th>National Place</th><th>Team Number</th><th>Location/Category</th><th>Division</th><th>Tier</th><th>Score Images</th><th>Play Time (HH:MM)</th><th>Warnings</th><th>CCS Score</th></tr>");
+		out.println("<tr><td>National Place</td><td>Team Number</td><td>Location/Category</td><td>Division</td><td>Tier</td><td>Score Images</td><td>Play Time (HH:MM)</td><td>Warnings</td><td>CCS Score</td></tr>");
 
 		for(int r=1; r<tempArr.length; r++) {
 			out.println("<tr>");
