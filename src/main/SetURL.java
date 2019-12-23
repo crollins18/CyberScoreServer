@@ -42,6 +42,7 @@ public class SetURL extends HttpServlet {
 		PrintWriter p = new PrintWriter(new File("url.dat"));
 		url = request.getParameter("url");
 		p.print(url);
+		p.close();
 		writer.println("<html><body><p>URL of " + url + " has successfully been set</p></body></html>");
 
 	}
