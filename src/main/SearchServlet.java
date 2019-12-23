@@ -34,7 +34,7 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter writer = response.getWriter();
-		processScores s = new processScores();
+		processScores s = new processScores(getServletContext().getRealPath(""));
 		writer.println("<html>");
 		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 		writer.println("<body>");
@@ -72,7 +72,7 @@ public class SearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		teamID = request.getParameter("teamID");
 		PrintWriter writer = response.getWriter();
-		processScores s = new processScores();
+		processScores s = new processScores(getServletContext().getRealPath(""));
 		writer.println("<html>");
 		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 		writer.println("<body>");

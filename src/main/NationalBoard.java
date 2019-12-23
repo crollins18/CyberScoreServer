@@ -34,7 +34,7 @@ public class NationalBoard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		processScores s = new processScores();
+		processScores s = new processScores(getServletContext().getRealPath(""));
 		out.println(HTML_START);
 		out.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 		out.println("<body>");

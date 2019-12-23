@@ -27,9 +27,9 @@ public class processScores {
 
 
 	
-	public processScores() throws FileNotFoundException {
-		//in = new Scanner(new File("prefs.dat"));
-		base = "http://ahscybercompinfo.azurewebsites.net/scoreboard/";
+	public processScores(String context) throws FileNotFoundException {
+		in = new Scanner(new File(context + "/board-admin/url.dat"));
+		base = in.nextLine();
 		//id = in.nextLine();
 		//state = in.nextLine();
 		//div = in.nextLine();
@@ -174,25 +174,7 @@ public class processScores {
 	}
 	
 	public static void main(String[] args) {
-		try {
-			processScores s = new processScores();
-			ArrayList<String[]> temp = s.getTeamboard("12-0169");
-			for(int r=0; r<2; r++) {
-				for(int c=0; c<temp.get(0).length; c++) {
-					System.out.print(temp.get(r)[c] + "\t");
-				}
-				System.out.println();
-			}
-			for(int r=2; r<temp.size(); r++) {
-				for(int c=0; c<temp.get(2).length; c++) {
-					System.out.print(temp.get(r)[c] + "\t");
-				}
-				System.out.println();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
  
 }
