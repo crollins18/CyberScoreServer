@@ -56,7 +56,7 @@ public class SetURL extends HttpServlet {
 		url = request.getParameter("url");
 		p.print(url);
 		p.close();
-		writer.println("<html><body><p>URL of " + url + " has successfully been set</p></body></html>");
+		writer.println("<html><body><p>URL of " + url + " has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
 
 	}
 
