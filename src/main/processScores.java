@@ -16,7 +16,6 @@ public class processScores {
 	private Scanner in;
 	private String base;
 	private String extended;
-	private String id;
 	private String state;
 	private String div;
 	private String[][] copiedArray;
@@ -30,7 +29,6 @@ public class processScores {
 	public processScores(String context) throws FileNotFoundException {
 		in = new Scanner(new File(context + "/board-admin/url.dat"));
 		base = in.nextLine();
-		//id = in.nextLine();
 		//state = in.nextLine();
 		//div = in.nextLine();
 		this.getScoreboard();
@@ -174,7 +172,7 @@ public class processScores {
 	}
 	
 	public static void main(String[] args) {
-		
+		System.out.print("here");
 	}
  
 }

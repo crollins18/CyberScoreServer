@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SetURL
  */
 @WebServlet("/board-admin/SetURL")
-public class SetURL extends HttpServlet {
+public class SetPerfs extends HttpServlet {
 	private String url;
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SetURL() {
+    public SetPerfs() {
         super();
         // TODO Auto-generated constructor stub
     }
