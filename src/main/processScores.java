@@ -180,7 +180,7 @@ public class processScores {
 		for(int r=0; r<copiedArray.length; r++) {
 			if(copiedArray[r][3].equals(div) && copiedArray[r][4].equals(tier)) {
 				copiedArray[r][9] = Integer.toString(i);
-				divArray.add(copiedArray[r]);
+				divTierArray.add(copiedArray[r]);
 				i++;
 			}
 		}
