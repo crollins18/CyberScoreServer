@@ -38,7 +38,7 @@ public class DivFilter extends HttpServlet {
 		out.println(HTML_START);
 		out.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 		out.println("<body>");
-		out.println("<h2>Showing Open Division Filtered National Scoreboard as of " +  new Date() + "</h2>");
+		out.println("<h2>Showing Division Filtered National Scoreboard as of " +  new Date() + "</h2>");
 		out.println("<h3>Fetching from " + s.getBase() + "</h3>");
 		out.println("<hr>");
 		out.println("<table border=\"4\" class='CSSTableGenerator'>");
