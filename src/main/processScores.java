@@ -178,7 +178,7 @@ public class processScores {
 		divTierArray = new ArrayList<String[]>();
 		int i = 1;
 		for(int r=0; r<copiedArray.length; r++) {
-			if(copiedArray[r][3].equals(div) && copiedArray[r][4].equals(div)) {
+			if(copiedArray[r][3].equals(div) && copiedArray[r][4].equals(tier)) {
 				copiedArray[r][9] = Integer.toString(i);
 				divArray.add(copiedArray[r]);
 				i++;
