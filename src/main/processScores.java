@@ -18,8 +18,10 @@ public class processScores {
 	private String extended;
 	private String state;
 	private String div;
+	private String tier;
 	private String[][] copiedArray;
 	private ArrayList<String[]> stateArray;
+	private ArrayList<String[]> divTierArray;
 	private ArrayList<String[]> divArray;
 	private ArrayList<String[]> teamStats;
 	private ArrayList<String[]> teamImages;
@@ -31,6 +33,7 @@ public class processScores {
 		base = in.nextLine();
 		state = in.nextLine();
 		div = in.nextLine();
+		tier = in.nextLine();
 		this.getScoreboard();
 	}
 	
@@ -169,6 +172,19 @@ public class processScores {
 			}
 		}
 		return divArray;
+	}
+	
+	public ArrayList<String[]> trimDivTier() {
+		divTierArray = new ArrayList<String[]>();
+		int i = 1;
+		for(int r=0; r<copiedArray.length; r++) {
+			if(copiedArray[r][3].equals(div) && copiedArray[r][4].equals(div)) {
+				copiedArray[r][9] = Integer.toString(i);
+				divArray.add(copiedArray[r]);
+				i++;
+			}
+		}
+		return divTierArray;
 	}
 	
 	public String[][] getArray() {

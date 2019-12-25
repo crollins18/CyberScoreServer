@@ -19,6 +19,7 @@ public class SetPerfs extends HttpServlet {
 	private String url;
 	private String state;
 	private String div;
+	private String tier;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -58,9 +59,11 @@ public class SetPerfs extends HttpServlet {
 		url = request.getParameter("url");
 		state = request.getParameter("state");
 		div = request.getParameter("div");
+		tier = request.getParameter("tier");
 		p.println(url);
 		p.println(state);
-		p.print(div);
+		p.println(div);
+		p.print(tier);
 		p.close();
 		writer.println("<html><body><p>Information has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
 
