@@ -29,8 +29,8 @@ public class processScores {
 	public processScores(String context) throws FileNotFoundException {
 		in = new Scanner(new File(context + "/board-admin/url.dat"));
 		base = in.nextLine();
-		//state = in.nextLine();
-		//div = in.nextLine();
+		state = in.nextLine();
+		div = in.nextLine();
 		this.getScoreboard();
 	}
 	
@@ -145,7 +145,7 @@ public class processScores {
 		stateArray = new ArrayList<String[]>();
 		int i = 1;
 		for(int r=0; r<copiedArray.length; r++) {
-			if(copiedArray[r][2].equals("NC") && copiedArray[r][3].equals("Open")) {
+			if(copiedArray[r][2].equals(state) && copiedArray[r][3].equals(div)) {
 				copiedArray[r][9] = Integer.toString(i);
 				stateArray.add(copiedArray[r]);
 				i++;
@@ -158,7 +158,7 @@ public class processScores {
 		divArray = new ArrayList<String[]>();
 		int i = 1;
 		for(int r=0; r<copiedArray.length; r++) {
-			if(copiedArray[r][3].equals("Open")) {
+			if(copiedArray[r][3].equals(div)) {
 				copiedArray[r][9] = Integer.toString(i);
 				divArray.add(copiedArray[r]);
 				i++;

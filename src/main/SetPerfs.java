@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SetURL
  */
-@WebServlet("/board-admin/SetURL")
+@WebServlet("/board-admin/SetPerfs")
 public class SetPerfs extends HttpServlet {
 	private String url;
+	private String state;
+	private String div;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -54,9 +56,13 @@ public class SetPerfs extends HttpServlet {
 			e.printStackTrace();
 		}
 		url = request.getParameter("url");
-		p.print(url);
+		state = request.getParameter("state");
+		div = request.getParameter("div");
+		p.println(url);
+		p.println(state);
+		p.print(div);
 		p.close();
-		writer.println("<html><body><p>URL of " + url + " has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
+		writer.println("<html><body><p>Information has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
 
 	}
 
