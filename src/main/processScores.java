@@ -39,7 +39,11 @@ public class processScores {
 	}
 	
 	public ArrayList<String[]> getTeamboard(String teamID) {
-		extended = base + "team.php?team=" + teamID;
+		String mid = "";
+		if(!base.substring(base.length()-1).equals("/")) {
+			mid = "/";
+		}
+		extended = base + mid + "team.php?team=" + teamID;
 		Document document = null;
 		try {
 			document = Jsoup.connect(extended).get();
