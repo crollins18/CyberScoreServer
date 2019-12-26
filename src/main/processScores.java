@@ -187,6 +187,16 @@ public class processScores {
 		return divTierArray;
 	}
 	
+	public int getTeamTot(String inTeam) {
+		int tmp = 0;
+		for(int r=0; r<copiedArray.length; r++) {
+			if(copiedArray[r][1].equals(inTeam)) {
+				tmp = Integer.parseInt(copiedArray[r][8]);	
+			}
+		}
+		return tmp;
+	}
+	
 	public String[][] getArray() {
 		return copiedArray;
 	}

@@ -19,6 +19,8 @@ public class TeamMonitor extends HttpServlet {
 	
 	private String teamMon1;
 	private String teamMon2;
+	private int team1Start;
+	private int team2Start;
 	
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +40,9 @@ public class TeamMonitor extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		processScores s = new processScores(getServletContext().getRealPath(""));
 		writer.println("<html>");
-		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\">");
+		writer.println("<script type=\"text/javascript\" src=\"notif.js\"></script>");
+		writer.println("</head>");
 		writer.println("<body>");
 		writer.println("<h2><b>Monitoring</b> Team Detail for " + teamMon1 + " as of " + new Date() + "</h2>");
 		writer.println("<h3>Fetching from " + s.getBase() + "</h3>");
@@ -86,6 +90,14 @@ public class TeamMonitor extends HttpServlet {
 			writer.println("</tr>");
 		}
 		writer.println("</table>");
+		if(s.getTeamTot(teamMon1) != team1Start) {
+			writer.println("<script>notifyMe(\"Team "+ teamMon1 + " has scoring changes\")</script>");
+			team1Start = s.getTeamTot(teamMon1);
+		}
+		if(s.getTeamTot(teamMon2) != team2Start) {
+			writer.println("<script>notifyMe(\"Team "+ teamMon2 + " has scoring changes\")</script>");
+			team2Start = s.getTeamTot(teamMon2);
+		}
 		writer.println("</body>");
 		writer.println("</html>");
 	}
@@ -99,6 +111,8 @@ public class TeamMonitor extends HttpServlet {
 		teamMon2 = request.getParameter("teamID2");
 		PrintWriter writer = response.getWriter();
 		processScores s = new processScores(getServletContext().getRealPath(""));
+		team1Start = s.getTeamTot(teamMon1);
+		team2Start = s.getTeamTot(teamMon2);
 		writer.println("<html>");
 		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 		writer.println("<body>");
