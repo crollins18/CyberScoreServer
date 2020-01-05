@@ -57,13 +57,7 @@ public class SetPerfs extends HttpServlet {
 			e.printStackTrace();
 		}
 		url = request.getParameter("url");
-		state = request.getParameter("state");
-		div = request.getParameter("div");
-		tier = request.getParameter("tier");
 		p.println(url);
-		p.println(state);
-		p.println(div);
-		p.print(tier);
 		p.close();
 		writer.println("<html><body><p>Information has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
 

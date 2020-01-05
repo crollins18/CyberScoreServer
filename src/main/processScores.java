@@ -29,11 +29,9 @@ public class processScores {
 
 	
 	public processScores(String context) throws FileNotFoundException {
-		in = new Scanner(new File(context + "/board-admin/url.dat"));
-		base = in.nextLine();
-		state = in.nextLine();
-		div = in.nextLine();
-		tier = in.nextLine();
+		//in = new Scanner(new File(context + "/board-admin/url.dat"));
+		//base = in.nextLine();
+		this.base = "http://ahscybercompinfo.azurewebsites.net/scoreboard/";
 		this.getScoreboard();
 	}
 	
@@ -148,24 +146,15 @@ public class processScores {
 
 	}
 	
-	public ArrayList<String[]> trimStateDiv() {
-		stateArray = new ArrayList<String[]>();
-		int i = 1;
-		for(int r=0; r<copiedArray.length; r++) {
-			if(copiedArray[r][2].equals(state) && copiedArray[r][3].equals(div)) {
-				copiedArray[r][9] = Integer.toString(i);
-				stateArray.add(copiedArray[r]);
-				i++;
-			}
-		}
-		return stateArray;
-	}
-	
-	public ArrayList<String[]> trimDiv() {
+	public ArrayList<String[]> trim(Object parm1) {
 		divArray = new ArrayList<String[]>();
 		int i = 1;
+		Sortable s1 = null;
+		if(parm1 instanceof Sortable) {
+			s1 = (Sortable) parm1;
+		}
 		for(int r=0; r<copiedArray.length; r++) {
-			if(copiedArray[r][3].equals(div)) {
+			if(copiedArray[r][s1.getRow()].equals(s1.toString())) {
 				copiedArray[r][9] = Integer.toString(i);
 				divArray.add(copiedArray[r]);
 				i++;
@@ -174,17 +163,50 @@ public class processScores {
 		return divArray;
 	}
 	
-	public ArrayList<String[]> trimDivTier() {
-		divTierArray = new ArrayList<String[]>();
+	public ArrayList<String[]> trim(Object parm1, Object parm2) {
+		divArray = new ArrayList<String[]>();
 		int i = 1;
+		Sortable s1 = null;
+		Sortable s2 = null;
+		if(parm1 instanceof Sortable) {
+			s1 = (Sortable) parm1;
+		}
+		if(parm2 instanceof Sortable) {
+			s2 = (Sortable) parm2;
+		}
 		for(int r=0; r<copiedArray.length; r++) {
-			if(copiedArray[r][3].equals(div) && copiedArray[r][4].equals(tier)) {
+			if(copiedArray[r][s1.getRow()].equals(s1.toString()) && copiedArray[r][s2.getRow()].equals(s2.toString())) {
 				copiedArray[r][9] = Integer.toString(i);
-				divTierArray.add(copiedArray[r]);
+				divArray.add(copiedArray[r]);
 				i++;
 			}
 		}
-		return divTierArray;
+		return divArray;
+	}
+	
+	public ArrayList<String[]> trim(Object parm1, Object parm2, Object parm3) {
+		divArray = new ArrayList<String[]>();
+		int i = 1;
+		Sortable s1 = null;
+		Sortable s2 = null;
+		Sortable s3 = null;
+		if(parm1 instanceof Sortable) {
+			s1 = (Sortable) parm1;
+		}
+		if(parm2 instanceof Sortable) {
+			s2 = (Sortable) parm2;
+		}
+		if(parm3 instanceof Sortable) {
+			s3 = (Sortable) parm3;
+		}
+		for(int r=0; r<copiedArray.length; r++) {
+			if(copiedArray[r][s1.getRow()].equals(s1.toString()) && copiedArray[r][s2.getRow()].equals(s2.toString()) && copiedArray[r][s3.getRow()].equals(s3.toString())) {
+				copiedArray[r][9] = Integer.toString(i);
+				divArray.add(copiedArray[r]);
+				i++;
+			}
+		}
+		return divArray;
 	}
 	
 	public int getTeamTot(String inTeam) {
@@ -202,7 +224,20 @@ public class processScores {
 	}
 	
 	public static void main(String[] args) {
-		System.out.print("here");
+		processScores p = null;
+		try {
+			p = new processScores("http://ahscybercompinfo.azurewebsites.net/scoreboard/");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<String[]> stateArray = p.trim("NC", "Open", "Platinum");
+		for(int r=0; r<stateArray.size(); r++) {
+			for(int c=0; c<stateArray.get(0).length; c++) {
+				System.out.print(stateArray.get(r)[c] + "\t");
+			}
+			System.out.println();
+		}
 	}
  
 }

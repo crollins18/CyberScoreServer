@@ -3,15 +3,10 @@
 <body>
 <h2>Cyberpatriot Scoring Server</h2>
 <hr>
-<ul>
-<li><p><a href="National">National Scoreboard</a></p></li>
-<li><p><a href="DivTierFilter">Division and Tier Filtered Scoreboard</a></p></li>
-<li><p><a href="DivFilter">Division Filtered Scoreboard</a></p></li>
-<li><p><a href="StateDivFilter">Division and State Filtered Scoreboard</a></p></li>
-<li><p><a href="searchTeam.html">Search for Team Detail</a></p></li>
-<li><p><a href="teamMonitor.html">Side by Side Team Monitor</a></p></li>
-
-</ul>
+<form name="commandline" method="post" action="Interpret">
+    Please enter a command. Type !help for help. <input type="text" name="commandIn"/>
+    <input type="submit" value="Submit" />
+</form>
 </body>
 
 </html>
