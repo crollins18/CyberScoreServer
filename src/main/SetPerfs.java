@@ -17,9 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/board-admin/SetPerfs")
 public class SetPerfs extends HttpServlet {
 	private String url;
-	private String state;
-	private String div;
-	private String tier;
+	private String prefix;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -57,7 +55,9 @@ public class SetPerfs extends HttpServlet {
 			e.printStackTrace();
 		}
 		url = request.getParameter("url");
+		prefix = request.getParameter("prefix");
 		p.println(url);
+		p.println(prefix);
 		p.close();
 		writer.println("<html><body><p>Information has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
 

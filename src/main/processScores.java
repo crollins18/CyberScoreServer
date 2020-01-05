@@ -19,6 +19,7 @@ public class processScores {
 	private String state;
 	private String div;
 	private String tier;
+	private String prefix;
 	private String[][] copiedArray;
 	private ArrayList<String[]> stateArray;
 	private ArrayList<String[]> divTierArray;
@@ -31,6 +32,7 @@ public class processScores {
 	public processScores(String context) throws FileNotFoundException {
 		in = new Scanner(new File(context + "/board-admin/url.dat"));
 		base = in.nextLine();
+		prefix = in.nextLine();
 		//this.base = "http://ahscybercompinfo.azurewebsites.net/scoreboard/";
 		this.getScoreboard();
 	}
@@ -44,7 +46,7 @@ public class processScores {
 		if(!base.substring(base.length()-1).equals("/")) {
 			mid = "/";
 		}
-		extended = base + mid + "team.php?team=" + teamID;
+		extended = base + mid + "team.php?team=" + prefix + teamID;
 		Document document = null;
 		try {
 			document = Jsoup.connect(extended).get();
