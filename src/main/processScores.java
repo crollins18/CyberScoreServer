@@ -29,9 +29,9 @@ public class processScores {
 
 	
 	public processScores(String context) throws FileNotFoundException {
-		//in = new Scanner(new File(context + "/board-admin/url.dat"));
-		//base = in.nextLine();
-		this.base = "http://ahscybercompinfo.azurewebsites.net/scoreboard/";
+		in = new Scanner(new File(context + "/board-admin/url.dat"));
+		base = in.nextLine();
+		//this.base = "http://ahscybercompinfo.azurewebsites.net/scoreboard/";
 		this.getScoreboard();
 	}
 	
