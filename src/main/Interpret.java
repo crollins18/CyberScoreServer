@@ -91,6 +91,32 @@ public class Interpret extends HttpServlet {
 				if(command.contains("!scoreboard")) {
 					String[] parms = command.split(" ");
 					int parmLength = parms.length - 1;
+					if(parmLength == 0) {
+						ArrayList<String[]> m = new ArrayList<String[]>();
+						String[][] n = p.getArray();
+						for(int r=0; r<n.length; r++) {
+							m.add(n[r]);
+						}
+						temp = m;
+						writer.println("<html>");
+						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+						writer.println("<body>");
+						writer.println("<h2>Showing National Scoreboard as of " +  new Date() + "</h2>");
+						writer.println("<hr>");
+						writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+
+						for(int r=0; r<temp.size(); r++) {
+							writer.println("<tr>");
+							for(int c=0; c<temp.get(0).length-1; c++) {
+								writer.print("<td>" + temp.get(r)[c] + "</td>");
+							}
+							writer.println("</tr>");
+						}
+						
+						writer.println("</table>");
+						writer.println("</body>");
+						writer.println("</html>");
+					}
 					if(parmLength == 1) {
 						String cmd1 = parms[1];
 						Object parm1 = this.determineCmd(cmd1);
@@ -112,6 +138,8 @@ public class Interpret extends HttpServlet {
 						Object parm3 = this.determineCmd(cmd3);
 						temp = p.trim(parm1, parm2, parm3);
 					}
+					if(parmLength != 0) {
+						
 					writer.println("<html>");
 					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 					writer.println("<body>");
@@ -130,6 +158,7 @@ public class Interpret extends HttpServlet {
 					writer.println("</table>");
 					writer.println("</body>");
 					writer.println("</html>");
+					}
 				}
 				if(command.contains("!monitor")) {
 					
@@ -141,8 +170,16 @@ public class Interpret extends HttpServlet {
 	}
 	
 	public Object determineCmd(String parm) {
-		if(parm.equals("Open") || parm.equals("All Service") || parm.equals("Middle School")) {
+		if(parm.equals("Open")) {
 			Division d = new Division(parm);
+			return d;
+		}
+		if(parm.equals("AS")) {
+			Division d = new Division("All Service");
+			return d;
+		}
+		if(parm.equals("MS")) {
+			Division d = new Division("Middle School");
 			return d;
 		}
 		if(parm.equals("Gold") || parm.equals("Silver") || parm.equals("Platinum")) {
