@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Interpret")
 public class Interpret extends HttpServlet {
+	private String command;
+	private PrintWriter writer = null;
+	private processScores p = null;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -38,15 +41,14 @@ public class Interpret extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter writer = null;
-		processScores p = new processScores(getServletContext().getRealPath(""));
+		p = new processScores(getServletContext().getRealPath(""));
 		try {
 			writer = response.getWriter();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String command = request.getParameter("commandIn");
+		command = request.getParameter("commandIn");
 		if(command.equals("!help")) {
 			writer.println("<html><body><h2>Help Page</h2><hr><p>!team <last four of team ID> - show team ID<br>" + 
 					"!monitor <last four of team ID #1> <last four of team ID #2> (coming soon) - monitor two teams with notifications<br>" + 
@@ -130,10 +132,6 @@ public class Interpret extends HttpServlet {
 					writer.println("</html>");
 				}
 				if(command.contains("!monitor")) {
-					
-				}
-				else {
-					writer.println("<html><body><p>No command found. Go back and type !help for help</p></body></html>");
 					
 				}
 				
