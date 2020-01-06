@@ -13,3 +13,6 @@ After installation on server, go to `/board-admin` to setup configuration. IF th
 ## Examples
 ### Home Page
 ![Screenshot](homepage.png)
+
+### Filtered View (ex. MS teams in NC)
+![Screenshot](MSfilterEx.png)
