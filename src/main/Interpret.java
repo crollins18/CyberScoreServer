@@ -34,6 +34,7 @@ public class Interpret extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		p = new processScores(getServletContext().getRealPath(""));
 		writer = response.getWriter();
 		if(command.equals("!help")) {
 			writer.println("<html><body><h2>Help Page</h2><hr><p>!team <last four of team ID> - show team ID<br>" + 
