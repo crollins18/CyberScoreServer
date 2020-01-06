@@ -9,3 +9,7 @@ After installation on server, go to `/board-admin` to setup configuration. IF th
 #### !monitor <last four of team ID> <last four of another team ID> (coming soon) - monitor two teams with notifications
 #### !scoreboard <parm1> <parm2> <parm3> - parm options can be in any order and either a state abbreviation, tier, or division - shows a filtered view of the public scoreboard
 #### !help - for help page
+
+## Examples
+### Home Page
+![Screenshot](homepage.png)
