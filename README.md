@@ -11,8 +11,8 @@ After installation on server, go to `/board-admin` to setup scoreboard URL and t
   ex. `!monitor 3010 0045`
 #### !scoreboard <parm1> <parm2> <parm3> - parm options can be in any order and either a state abbreviation, tier, or division - shows a filtered view of the public scoreboard
   ex. `!scoreboard NC AS Gold`
-  ex. `!scoreboard MS NC`
-  ex. `!scoreboard Open NC`
+  ex. `!scoreboard Platinum NC MS`
+  ex. `!scoreboard Open Silver NC`
   ##### Order of parameters does NOT matter
 #### !help - for help page
 
