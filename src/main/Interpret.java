@@ -19,6 +19,10 @@ public class Interpret extends HttpServlet {
 	private String command;
 	private PrintWriter writer = null;
 	private processScores p = null;
+	private int team1Start = 0;
+	private int team2Start = 0;
+	private String tID1 = null;
+	private String tID2 = null;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -148,7 +152,74 @@ public class Interpret extends HttpServlet {
 					}
 				}
 				if(command.contains("!monitor")) {
+					int team1Current = p.getTeamTot(tID1);
+					int team2Current = p.getTeamTot(tID2);
+					//System.out.println(team1Current);
+					//System.out.println(team2Current);
 					
+					ArrayList<String[]> temp1 = null;
+					ArrayList<String[]> temp2 = null;
+
+					temp1 = p.getTeamboard(tID1);
+					writer.println("<html>");
+					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\">");
+					writer.println("<script type=\"text/javascript\" src=\"notif.js\"></script>");
+					writer.println("</head>");
+					writer.println("<body>");
+					if(team1Current != team1Start) {
+						writer.println("<script>notifyMe(\"Team "+ tID1 + " has scoring changes\")</script>");
+						team1Start = team1Current;
+					}
+					if(team2Current != team2Start) {
+						writer.println("<script>notifyMe(\"Team "+ tID2 + " has scoring changes\")</script>");
+						team2Start = team2Current;
+					}
+					writer.println("<h2>Monitoring Team Detail for Team " + tID1 + " as of " + new Date() + "</h2>");
+					writer.println("<hr>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					for(int r=0; r<2; r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp1.get(0).length; c++) {
+							writer.print("<td>"+temp1.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					writer.println("<br>");
+					for(int r=2; r<temp1.size(); r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp1.get(2).length; c++) {
+							writer.print("<td>"+temp1.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					
+					temp2 = p.getTeamboard(tID2);
+					writer.println("<h2>Monitoring Team Detail for Team " + tID2 + " as of " + new Date() + "</h2>");
+					writer.println("<hr>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					for(int r=0; r<2; r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp2.get(0).length; c++) {
+							writer.print("<td>"+temp2.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					writer.println("<br>");
+					for(int r=2; r<temp2.size(); r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp2.get(2).length; c++) {
+							writer.print("<td>"+temp2.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					writer.println("</body>");
+					writer.println("</html>");
 				}
 				
 			}
@@ -280,7 +351,67 @@ public class Interpret extends HttpServlet {
 					}
 				}
 				if(command.contains("!monitor")) {
+					String[] parms = command.split(" ");
+					tID1 = parms[1];
+					tID2 = parms[2];
+					team1Start = p.getTeamTot(tID1);
+					team2Start = p.getTeamTot(tID2);
+					//System.out.println(team1Start);
+					//System.out.println(team2Start);
 					
+					ArrayList<String[]> temp1 = null;
+					ArrayList<String[]> temp2 = null;
+
+					temp1 = p.getTeamboard(tID1);
+					writer.println("<html>");
+					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+					writer.println("<body>");
+					writer.println("<h2>Monitoring Team Detail for Team " + tID1 + " as of " + new Date() + "</h2>");
+					writer.println("<hr>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					for(int r=0; r<2; r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp1.get(0).length; c++) {
+							writer.print("<td>"+temp1.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					writer.println("<br>");
+					for(int r=2; r<temp1.size(); r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp1.get(2).length; c++) {
+							writer.print("<td>"+temp1.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					
+					temp2 = p.getTeamboard(tID2);
+					writer.println("<h2>Monitoring Team Detail for Team " + tID2 + " as of " + new Date() + "</h2>");
+					writer.println("<hr>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					for(int r=0; r<2; r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp2.get(0).length; c++) {
+							writer.print("<td>"+temp2.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
+					writer.println("<br>");
+					for(int r=2; r<temp2.size(); r++) {
+						writer.println("<tr>");
+						for(int c=0; c<temp2.get(2).length; c++) {
+							writer.print("<td>"+temp2.get(r)[c]+"</td>");
+						}
+						writer.println("</tr>");
+					}
+					writer.println("</table>");
+					writer.println("</body>");
+					writer.println("</html>");
 				}
 				
 			}
