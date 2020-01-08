@@ -2,6 +2,9 @@ package main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -154,12 +157,23 @@ public class Interpret extends HttpServlet {
 				if(command.contains("!monitor")) {
 					int team1Current = p.getTeamTot(tID1);
 					int team2Current = p.getTeamTot(tID2);
+					Date team1Time = p.getTeamTime(tID1);
+					Date team2Time = p.getTeamTime(tID2);
 					//System.out.println(team1Current);
 					//System.out.println(team2Current);
 					
 					ArrayList<String[]> temp1 = null;
 					ArrayList<String[]> temp2 = null;
-
+					DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+					String warningTime1 = "05:45";
+					Date warn1 = null;
+					try {
+						warn1 = dateFormat.parse(warningTime1);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 					temp1 = p.getTeamboard(tID1);
 					writer.println("<html>");
 					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\">");
@@ -173,6 +187,12 @@ public class Interpret extends HttpServlet {
 					if(team2Current != team2Start) {
 						writer.println("<script>notifyMe(\"Team "+ tID2 + " has scoring changes\")</script>");
 						team2Start = team2Current;
+					}
+					if(team1Time.compareTo(warn1) > 0) {
+						writer.println("<script>notifyMe(\"Team "+ tID1 + " has 15 minutes left!\")</script>");
+					}
+					if(team2Time.compareTo(warn1) > 0) {
+						writer.println("<script>notifyMe(\"Team "+ tID2 + " has 15 minutes left!\")</script>");
 					}
 					writer.println("<h2>Monitoring Team Detail for Team " + tID1 + " as of " + new Date() + "</h2>");
 					writer.println("<hr>");

@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import org.jsoup.Jsoup;
@@ -219,6 +223,24 @@ public class processScores {
 			}
 		}
 		return tmp;
+	}
+	
+	public Date getTeamTime(String inTeam) {
+		String tmp = null;
+		for(int r=0; r<copiedArray.length; r++) {
+			if(copiedArray[r][1].equals(prefix + inTeam)) {
+				tmp = copiedArray[r][6];	
+			}
+		}
+		DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+		Date d = null;
+		try {
+			d = dateFormat.parse(tmp);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return d;
 	}
 	
 	public String[][] getArray() {
