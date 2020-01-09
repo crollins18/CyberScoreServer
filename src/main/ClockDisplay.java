@@ -38,7 +38,8 @@ public class ClockDisplay extends HttpServlet {
 		}
 		else {
 			response.addHeader("Refresh", "5");
-			p.println("<html><body><h1>" + c.getElapsedTime() + "</h1></body></html>");
+			p.println("<html><body><h1>Elapsed Time: " + c.getElapsedTime() + "</h1><hr>");
+			p.println("</body></html>");
 		}
 
 	}
