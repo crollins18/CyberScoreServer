@@ -7,7 +7,7 @@ After installation on server, go to `/board-admin` to setup scoreboard URL and t
 ## Commands
 #### !team <last four of team ID> - show team detail
   ex. `!team 1301`
-#### !monitor <last four of team ID> <last four of another team ID> (coming soon) - monitor two teams with notifications
+#### !monitor <last four of team ID> <last four of another team ID> - monitor two teams with notifications
   ex. `!monitor 3010 0045`
 #### !scoreboard <parm1> <parm2> <parm3> - parm options can be in any order and either a state abbreviation, tier, or division - shows a filtered view of the public scoreboard
   ex. `!scoreboard NC AS Gold`
