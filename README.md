@@ -5,7 +5,7 @@ A java servlet based scoreboard parsing and filtering application. For deploymen
 After installation on server, go to `/board-admin` to setup scoreboard URL and the team prefix (ex. 12-). IF this is not done, errors when loading pages will occur.
 
 ## Commands
-#### !team <last four of team ID> - show team ID
+#### !team <last four of team ID> - show team detail
   ex. `!team 1301`
 #### !monitor <last four of team ID> <last four of another team ID> (coming soon) - monitor two teams with notifications
   ex. `!monitor 3010 0045`
