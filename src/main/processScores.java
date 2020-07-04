@@ -37,7 +37,6 @@ public class processScores {
 		in = new Scanner(new File(context + "/board-admin/url.dat"));
 		base = in.nextLine();
 		prefix = in.nextLine();
-		//this.base = "http://ahscybercompinfo.azurewebsites.net/scoreboard/";
 		this.getScoreboard();
 	}
 	
