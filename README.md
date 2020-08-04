@@ -1,4 +1,5 @@
 # CyberScoreServer
+## Please note this only works when the scoreboard at [scoreboard.uscyberpatriot.org](scoreboard.uscyberpatriot.org) is live!
 ## Setup
 A java servlet based scoreboard parsing and filtering application. For deployment, I recommend using Eclipse for Java EE Developers and the Azure Web Application add-on to Eclipse for seamless transfer to an Azure web app. Of course, uploading this straight to your Tomcat server also works.
 
