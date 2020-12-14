@@ -59,8 +59,14 @@ public class SetPerfs extends HttpServlet {
 		p.println(url);
 		p.println(prefix);
 		p.close();
-		writer.println("<html><body><p>Information has successfully been set</p></body><a href=\"/\"><p>Return to main menu</p></a></html>");
-
+		writer.println("<html>"
+				+ "<body>"
+				+ "<script>"
+				+ "alert('Server preferences have been set successfully');\n" + 
+				"window.location = '../';"
+				+ "</script>"
+				+ "</body>"
+				+ "</html>");
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 /**
  * Servlet implementation class Interpret
  */
-@WebServlet("/Interpret")
+@WebServlet("/go")
 public class Interpret extends HttpServlet {
 	private String command;
 	private PrintWriter writer = null;
@@ -57,11 +57,15 @@ public class Interpret extends HttpServlet {
 	}
 	
 	public void printOut() throws FileNotFoundException {
-		if(command.equals("!help")) {
-			writer.println("<html><body><h2>Help Page</h2><hr><p>!team <last four of team ID> - show team ID<br>" + 
-					"!monitor <last four of team ID #1> <last four of team ID #2> (coming soon) - monitor two teams with notifications<br>" + 
-					"!scoreboard <state, tier or division> <state, tier or division> <state, tier or division> - show a filtered view of the public scoreboard<br>" + 
-					"!help - for help</p></body></html>");		}
+		if(command.equals("!help")) {	
+			writer.println("<html>"
+					+ "<body>"
+					+ "<script>"  
+					+ "window.location = 'help.html';"
+					+ "</script>"
+					+ "</body>"
+					+ "</html>");
+		}
 		else {			
 	        TreeMap<String, ArrayList<String>> tempImages = null;
 	        
@@ -72,32 +76,57 @@ public class Interpret extends HttpServlet {
 		        TreeMap<String, Team> sorted_map = new TreeMap<String, Team>(p.getTeamInfo());
 
 				writer.println("<html>");
-				writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+				writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 				writer.println("<body>");
-				writer.println("<h2>Showing Team Detail for Team " + teamID + " as of " + new Date() + "</h2>");
-				writer.println("<hr>");
-				writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-				writer.println("<tr><td>Team Number</td><td>Location/Category</td><td>Division</td><td>Tier</td><td>Scored<br>Images</td><td>Play Time<br>hh:mm:ss</td><td>Score Time<br>hh:mm:ss</td><td>**</td><td>CCS<br>Score</td></tr>");
+				writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
+						"      <div class=\"container\">\n" + 
+						"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
+						"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
+						"          <span class=\"navbar-toggler-icon\"></span>\n" + 
+						"        </button>\n" + 
+						"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
+						"          <ul class=\"navbar-nav\">\n" + 
+						"            <li class=\"nav-item\">\n" + 
+						"              <a class=\"nav-link\" href=\"index.html\">Back to Main Menu</a>\n" + 
+						"            </li>\n" + 
+						"          </ul>\n" + 
+						"        </div>\n" + 
+						"      </div>\n" + 
+						"    </div>");
+				writer.println("<div class=\"container\">");
+				writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+				writer.println("<h4>Showing Team Detail for Team " + teamID + " as of " + new Date() + "</h4>");
+				writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
+				writer.println("<tr><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored<br>Images</th><th scope=\"col\">Play Time<br>hh:mm:ss</th><th scope=\"col\">Score Time<br>hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS<br>Score</th></tr>");
+				writer.println("</thead><tbody>");
+				
 				for (Team row: sorted_map.values()) {
-					writer.println("<tr>");
+					writer.println("<tr class=\"table-secondary\">");
 					for(int i=0; i<row.getInfo().size(); i++) {
 						writer.print("<td>"+row.getInfo().get(i)+"</td>");
 					}
 					writer.println("</tr>");
 				}
+				writer.println("</tbody>");
 				writer.println("</table>");
-				writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-				writer.println("<br>");
-				writer.println("<tr><td>Image</td><td>Time</td><td>Found</td><td>Remaining</td><td>Penalties</td><td>Score</td><td>**</td></tr>");
+				
+				writer.println("<table class=\"table table-hover\"><thead>");
+				writer.println("<tr><th scope=\"col\">Image</th><th scope=\"col\">Time</th><th scope=\"col\">Found</th><th scope=\"col\">Remaining</th><th scope=\"col\">Penalties</th><th scope=\"col\">Score</th><th scope=\"col\">**</th></tr>");
+				writer.println("</thead><tbody>");
+
 				tempImages = new TreeMap<String, ArrayList<String>>(p.getTeamImages());
 				for (ArrayList<String> row: tempImages.values()) {
-					writer.println("<tr>");
+					writer.println("<tr class=\"table-secondary\">");
 					for(int i=0; i<row.size(); i++) {
 						writer.print("<td>"+row.get(i)+"</td>");
 					}
 					writer.println("</tr>");
 				}
+				writer.println("</tbody>");
 				writer.println("</table>");
+				writer.println("</div></div></div></div>");
+
+				
 				writer.println("</body>");
 				writer.println("</html>");
 			}
@@ -118,21 +147,39 @@ public class Interpret extends HttpServlet {
 						sorted_map.putAll(map);
 						
 						writer.println("<html>");
-						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 						writer.println("<body>");
-						writer.println("<h2>Showing National Scoreboard as of " +  new Date() + "</h2>");
-						writer.println("<hr>");
-						writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-						writer.println("<tr><td></td><td>Team Number</td><td>Location/Category</td><td>Division</td><td>Tier</td><td>Scored Images</td><td>Play Time hh:mm:ss</td><td>**</td><td>CCS Score</td></tr>");
+						writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
+								"      <div class=\"container\">\n" + 
+								"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
+								"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
+								"          <span class=\"navbar-toggler-icon\"></span>\n" + 
+								"        </button>\n" + 
+								"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
+								"          <ul class=\"navbar-nav\">\n" + 
+								"            <li class=\"nav-item\">\n" + 
+								"              <a class=\"nav-link\" href=\"index.html\">Back to Main Menu</a>\n" + 
+								"            </li>\n" + 
+								"          </ul>\n" + 
+								"        </div>\n" + 
+								"      </div>\n" + 
+								"    </div>");
+						writer.println("<div class=\"container\">");
+						writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+						writer.println("<h4 id=\"tables\">Showing National Scoreboard as of " +  new Date() + "</h4>");
+						writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
+						writer.println("<tr><th scope=\"col\"></th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored Images</th><th scope=\"col\">Play Time hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS Score</th></tr></thead>");
+						writer.println("<tbody>");
 						for (Team row: sorted_map.values()) {
-							writer.println("<tr>");
+							writer.println("<tr class=\"table-secondary\">");
 							for(int i=0; i<row.getInfo().size(); i++) {
 								writer.print("<td>"+row.getInfo().get(i)+"</td>");
 							}
 							writer.println("</tr>");
 						}
-						
+						writer.println("</tbody>");
 						writer.println("</table>");
+						writer.println("</div></div></div></div>");
 						writer.println("</body>");
 						writer.println("</html>");
 					}
@@ -171,28 +218,47 @@ public class Interpret extends HttpServlet {
 					if(parmLength != 0) {
 						
 					writer.println("<html>");
-					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
 					writer.println("<body>");
-					writer.println("<h2>Showing Filtered Scoreboard as of " +  new Date() + "</h2>");
-					writer.println("<hr>");
-					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-					writer.println("<tr><td>National Place</td><td>Team Number</td><td>Location/Category</td><td>Division</td><td>Tier</td><td>Score Images</td><td>Play Time (HH:MM)</td><td>Warnings</td><td>CCS Score</td><td>Filtered Place</td></tr>");
+					writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
+								"      <div class=\"container\">\n" + 
+								"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
+								"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
+								"          <span class=\"navbar-toggler-icon\"></span>\n" + 
+								"        </button>\n" + 
+								"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
+								"          <ul class=\"navbar-nav\">\n" + 
+								"            <li class=\"nav-item\">\n" + 
+								"              <a class=\"nav-link\" href=\"index.html\">Back to Main Menu</a>\n" + 
+								"            </li>\n" + 
+								"          </ul>\n" + 
+								"        </div>\n" + 
+								"      </div>\n" + 
+								"    </div>");
+					writer.println("<div class=\"container\">");
+					writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+					writer.println("<h4>Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
+					writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
+					writer.println("<tr><th scope=\"col\">National Place</th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Score Images</th><th scope=\"col\">Play Time (HH:MM)</th><th scope=\"col\">Warnings</th><th scope=\"col\">CCS Score</th><th scope=\"col\">Filtered Place</th></tr>");
+					writer.println("</thead><tbody>");
+					
 					
 					int count = 1;
 					for (Team row: sorted_map.values()) {
-						writer.println("<tr>");
+						writer.println("<tr class=\"table-secondary\">");
 						for(int i=0; i<row.getInfo().size(); i++) {
 							writer.print("<td>"+row.getInfo().get(i)+"</td>");
 						}
 						writer.println("<td>");
 						writer.println(count);
-						writer.println("</d>");
+						writer.println("</td>");
 
 						writer.println("</tr>");
 						count++;
 					}
-					
+					writer.println("</tbody>");
 					writer.println("</table>");
+					writer.println("</div></div></div></div>");
 					writer.println("</body>");
 					writer.println("</html>");
 					}
