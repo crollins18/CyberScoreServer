@@ -34,6 +34,14 @@ public class Interpret extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter writerSp = response.getWriter();
+		if(command == null) {
+			writerSp.println("<html><body><h1>Please go to the home (root) page to send a command first</h1></body></html>");
+		}
+		else {
+			p = new processScores(getServletContext().getRealPath(""));
+			writer = response.getWriter();
+		}
 		this.printOut();
 	}
 
