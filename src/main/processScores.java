@@ -34,51 +34,57 @@ public class processScores {
 		
 		Document document = null;
 		try {
-			document = Jsoup.connect(extended).get();
+			document = Jsoup.connect(extended).followRedirects(false).get();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		teamInfo = new HashMap<String, Team>();
-		teamImages = new HashMap<String, ArrayList<String>>();
-
 		
-		for (Element row : document.select("table.CSSTableGenerator:nth-of-type(1) tr")) {
-			
-			final String teamNum = row.select("td:nth-of-type(1)").text();
-			final String state = row.select("td:nth-of-type(2)").text();
-			final String division = row.select("td:nth-of-type(3)").text();
-			final String tier = row.select("td:nth-of-type(4)").text();
-			final String images = row.select("td:nth-of-type(5)").text();
-			final String playTime = row.select("td:nth-of-type(6)").text();
-			final String scoreTime = row.select("td:nth-of-type(7)").text();
-			final String warnings = row.select("td:nth-of-type(8)").text();
-			final String totScore= row.select("td:nth-of-type(9)").text();
-			
-			Team tempTeam = new Team(teamNum, state, division, tier, images, playTime, scoreTime, warnings, totScore, 2);
-			teamInfo.put(teamNum, tempTeam);
-						
-			if(tempTeam.getInfo().get(0).equals("Team Number")) {
-				teamInfo.remove(tempTeam.getInfo().get(0));
-			}
+		if(document.getElementsByTag("body").get(0).toString().equals("<body></body>")) {
+			teamInfo = null;
+			teamImages = null;
+		}
 
-		}	
-		
-		for (Element row : document.select("table.CSSTableGenerator:nth-of-type(2) tr")) {
+		else {
+			teamInfo = new HashMap<String, Team>();
+			teamImages = new HashMap<String, ArrayList<String>>();
+			for (Element row : document.select("table.CSSTableGenerator:nth-of-type(1) tr")) {
+				
+				final String teamNum = row.select("td:nth-of-type(1)").text();
+				final String state = row.select("td:nth-of-type(2)").text();
+				final String division = row.select("td:nth-of-type(3)").text();
+				final String tier = row.select("td:nth-of-type(4)").text();
+				final String images = row.select("td:nth-of-type(5)").text();
+				final String playTime = row.select("td:nth-of-type(6)").text();
+				final String scoreTime = row.select("td:nth-of-type(7)").text();
+				final String warnings = row.select("td:nth-of-type(8)").text();
+				final String totScore= row.select("td:nth-of-type(9)").text();
+				
+				Team tempTeam = new Team(teamNum, state, division, tier, images, playTime, scoreTime, warnings, totScore, 2);
+				teamInfo.put(teamNum, tempTeam);
+							
+				if(tempTeam.getInfo().get(0).equals("Team Number")) {
+					teamInfo.remove(tempTeam.getInfo().get(0));
+				}
+	
+			}	
 			
-			final String img = row.select("td:nth-of-type(1)").text();
-			final String time = row.select("td:nth-of-type(2)").text();
-			final String found = row.select("td:nth-of-type(3)").text();
-			final String remain = row.select("td:nth-of-type(4)").text();
-			final String pen = row.select("td:nth-of-type(5)").text();
-			final String score = row.select("td:nth-of-type(6)").text();
-			final String warn = row.select("td:nth-of-type(7)").text();
-			
-			ArrayList<String> tempImages = new ArrayList<String>() {{ add(img); add(time); add(found); add(remain); add(pen); add(score); add(warn);}};
-			teamImages.put(tempImages.get(0), tempImages);
-			if(tempImages.get(0).equals("Image")) {
-				teamImages.remove(tempImages.get(0));
+			for (Element row : document.select("table.CSSTableGenerator:nth-of-type(2) tr")) {
+				
+				final String img = row.select("td:nth-of-type(1)").text();
+				final String time = row.select("td:nth-of-type(2)").text();
+				final String found = row.select("td:nth-of-type(3)").text();
+				final String remain = row.select("td:nth-of-type(4)").text();
+				final String pen = row.select("td:nth-of-type(5)").text();
+				final String score = row.select("td:nth-of-type(6)").text();
+				final String warn = row.select("td:nth-of-type(7)").text();
+				
+				ArrayList<String> tempImages = new ArrayList<String>() {{ add(img); add(time); add(found); add(remain); add(pen); add(score); add(warn);}};
+				teamImages.put(tempImages.get(0), tempImages);
+				if(tempImages.get(0).equals("Image")) {
+					teamImages.remove(tempImages.get(0));
+				}
 			}
 		}
 	}

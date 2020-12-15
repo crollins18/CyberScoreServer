@@ -74,12 +74,13 @@ public class Interpret extends HttpServlet {
 		}
 		else {			
 	        TreeMap<String, ArrayList<String>> tempImages = null;
-	        
+
 			if(command.contains("!team")) {
+				TreeMap<String, Team> sorted_map = null;
 				String teamID = command.split(" ")[1];
 				p.getTeamboard(teamID);
-				
-		        TreeMap<String, Team> sorted_map = new TreeMap<String, Team>(p.getTeamInfo());
+				try {
+			    sorted_map = new TreeMap<String, Team>(p.getTeamInfo());
 
 				writer.println("<html>");
 				writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
@@ -123,6 +124,7 @@ public class Interpret extends HttpServlet {
 				writer.println("</thead><tbody>");
 
 				tempImages = new TreeMap<String, ArrayList<String>>(p.getTeamImages());
+				
 				for (ArrayList<String> row: tempImages.values()) {
 					writer.println("<tr class=\"table-secondary\">");
 					for(int i=0; i<row.size(); i++) {
@@ -137,6 +139,17 @@ public class Interpret extends HttpServlet {
 				
 				writer.println("</body>");
 				writer.println("</html>");
+				}
+				catch (Exception e){
+					writer.println("<html>"
+							+ "<body>"
+							+ "<script>"
+							+ "alert('The team number you entered does not exist or the URL you specified for a Cyberpatriot Scoreboard is invalid.');\n" + 
+							"window.location = 'index.jsp';"
+							+ "</script>"
+							+ "</body>"
+							+ "</html>");
+				}
 			}
 			else {
 				
