@@ -34,15 +34,21 @@ public class Interpret extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter writerSp = response.getWriter();
+		writer = response.getWriter();
 		if(command == null) {
-			writerSp.println("<html><body><h1>Please go to the home (root) page to send a command first</h1></body></html>");
+			writer.println("<html>"
+					+ "<body>"
+					+ "<script>"
+					+ "alert('Please go to the main menu to send a command first');\n" + 
+					"window.location = 'index.jsp';"
+					+ "</script>"
+					+ "</body>"
+					+ "</html>");
 		}
 		else {
 			p = new processScores(getServletContext().getRealPath(""));
-			writer = response.getWriter();
+			this.printOut();
 		}
-		this.printOut();
 	}
 
 	/**
@@ -76,7 +82,9 @@ public class Interpret extends HttpServlet {
 		        TreeMap<String, Team> sorted_map = new TreeMap<String, Team>(p.getTeamInfo());
 
 				writer.println("<html>");
-				writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+				writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
+						"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
+						"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script></head>");
 				writer.println("<body>");
 				writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
 						"      <div class=\"container\">\n" + 
@@ -87,7 +95,7 @@ public class Interpret extends HttpServlet {
 						"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
 						"          <ul class=\"navbar-nav\">\n" + 
 						"            <li class=\"nav-item\">\n" + 
-						"              <a class=\"nav-link\" href=\"index.html\">Back to Main Menu</a>\n" + 
+						"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
 						"            </li>\n" + 
 						"          </ul>\n" + 
 						"        </div>\n" + 
@@ -147,7 +155,9 @@ public class Interpret extends HttpServlet {
 						sorted_map.putAll(map);
 						
 						writer.println("<html>");
-						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
+								"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
+								"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script></head>");
 						writer.println("<body>");
 						writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
 								"      <div class=\"container\">\n" + 
@@ -158,7 +168,7 @@ public class Interpret extends HttpServlet {
 								"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
 								"          <ul class=\"navbar-nav\">\n" + 
 								"            <li class=\"nav-item\">\n" + 
-								"              <a class=\"nav-link\" href=\"index.html\">Back to Main Menu</a>\n" + 
+								"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
 								"            </li>\n" + 
 								"          </ul>\n" + 
 								"        </div>\n" + 
@@ -218,7 +228,9 @@ public class Interpret extends HttpServlet {
 					if(parmLength != 0) {
 						
 					writer.println("<html>");
-					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"></head>");
+					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
+							"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
+							"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script></head>");
 					writer.println("<body>");
 					writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
 								"      <div class=\"container\">\n" + 
@@ -229,7 +241,7 @@ public class Interpret extends HttpServlet {
 								"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
 								"          <ul class=\"navbar-nav\">\n" + 
 								"            <li class=\"nav-item\">\n" + 
-								"              <a class=\"nav-link\" href=\"index.html\">Back to Main Menu</a>\n" + 
+								"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
 								"            </li>\n" + 
 								"          </ul>\n" + 
 								"        </div>\n" + 
