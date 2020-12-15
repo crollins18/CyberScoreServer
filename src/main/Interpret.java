@@ -170,8 +170,18 @@ public class Interpret extends HttpServlet {
 						writer.println("<html>");
 						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
 								"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
-								"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script></head>");
+								"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>"
+								+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
+								"<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n" + 
+								"<script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>\n" + 
+								"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>"
+								+ "</head>");
 						writer.println("<body>");
+						writer.println("<script>\n" + 
+								"$(document).ready(function() {\n" + 
+								"    $('#generated').DataTable();\n" + 
+								"} );\n" + 
+								"</script>");
 						writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
 								"      <div class=\"container\">\n" + 
 								"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
@@ -190,7 +200,7 @@ public class Interpret extends HttpServlet {
 						writer.println("<div class=\"container\">");
 						writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
 						writer.println("<h4 id=\"tables\">Showing National Scoreboard as of " +  new Date() + "</h4>");
-						writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
+						writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
 						writer.println("<tr><th scope=\"col\"></th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored Images</th><th scope=\"col\">Play Time hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS Score</th></tr></thead>");
 						writer.println("<tbody>");
 						for (Team row: sorted_map.values()) {
@@ -243,8 +253,18 @@ public class Interpret extends HttpServlet {
 					writer.println("<html>");
 					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
 							"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
-							"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script></head>");
+							"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>"
+							+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
+							"<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n" + 
+							"<script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>\n" + 
+							"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>"
+							+ "</head>");
 					writer.println("<body>");
+					writer.println("<script>\n" + 
+							"$(document).ready(function() {\n" + 
+							"    $('#generated').DataTable();\n" + 
+							"} );\n" + 
+							"</script>");
 					writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
 								"      <div class=\"container\">\n" + 
 								"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
@@ -263,7 +283,7 @@ public class Interpret extends HttpServlet {
 					writer.println("<div class=\"container\">");
 					writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
 					writer.println("<h4>Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
-					writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
+					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
 					writer.println("<tr><th scope=\"col\">National Place</th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Score Images</th><th scope=\"col\">Play Time (HH:MM)</th><th scope=\"col\">Warnings</th><th scope=\"col\">CCS Score</th><th scope=\"col\">Filtered Place</th></tr>");
 					writer.println("</thead><tbody>");
 					
