@@ -11,7 +11,20 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-	
+	<%
+      String context = getServletContext().getRealPath("");
+      Scanner in = new Scanner(new File(context + "/board-admin/url.dat"));
+      String base = null;
+      String prefix = null;
+      try {
+              	base = "<b>" + in.nextLine() + "</b>"; 
+        		prefix = "<b>" + in.nextLine() + "</b>";
+        }
+      catch (Exception e){
+    			base = "<div class = \"warning\">Please set the scoreboard URL on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>";
+    			prefix = "<div class = \"warning\">Please set the team prefix on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>";
+    	}
+	%>
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
       <div class="container">
         <a href="" class="navbar-brand">CyberScoreServer</a>
@@ -31,6 +44,9 @@
     <div class="container">
         <div class="row">
           <div class="col-lg-6">
+          <% 
+          if (!base.equals("<div class = \"warning\">Please set the scoreboard URL on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>") && !prefix.equals("<div class = \"warning\">Please set the team prefix on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>")) {
+          %>
             <div class="bs-component">
               <form name="commandline" method="post" action="go">
                 <fieldset>
@@ -45,25 +61,17 @@
                 </fieldset>
               </form>
             </div>
-          </div>
-          <div class="container">
-          <%
-          	String context = getServletContext().getRealPath("");
-          	Scanner in = new Scanner(new File(context + "/board-admin/url.dat"));
-            String base = null;
-            String prefix = null;
-    		try {
-              	base = in.nextLine();
-        		prefix = in.nextLine();
-    		}
-    		catch (Exception e){
-    			base = "Please set the scoreboard URL on the config page";
-    			prefix = "Please set the team prefix on the config page";
-    		}
+          <%}
+          else {}
           %>
+            
+          </div>
+          
+          <div class="container">
           <p>Current Scoreboard URL: <%=base%></p>
           <p>Team Prefix: <%=prefix%></p>
         </div>
+        
        </div>
      </div>
 

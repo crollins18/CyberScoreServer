@@ -226,6 +226,8 @@ caption {
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
+  background-color: #2C9CD3;
+  color: white;
 }
 
 label {
@@ -10571,3 +10573,7 @@ legend {
   border-bottom: none;
 }
 .input-long { width: 300px }
+
+.warning {
+	color: red;
+}
