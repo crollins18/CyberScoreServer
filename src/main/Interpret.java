@@ -77,7 +77,9 @@ public class Interpret extends HttpServlet {
 
 			if(command.contains("!team")) {
 				TreeMap<String, Team> sorted_map = null;
-				String teamID = command.split(" ")[1];
+				String teamID = null;
+				try {
+				teamID = command.split(" ")[1];
 				p.getTeamboard(teamID);
 				try {
 			    sorted_map = new TreeMap<String, Team>(p.getTeamInfo());
@@ -124,6 +126,17 @@ public class Interpret extends HttpServlet {
 							+ "<body>"
 							+ "<script>"
 							+ "alert('The team number you entered does not exist or the URL you specified for a Cyberpatriot Scoreboard is invalid.');\n" + 
+							"window.location = 'index.jsp';"
+							+ "</script>"
+							+ "</body>"
+							+ "</html>");
+					}
+				}
+				catch (Exception e) {
+					writer.println("<html>"
+							+ "<body>"
+							+ "<script>"
+							+ "alert('Error parsing team ID from command. When using the !team command make sure to provide the last four of the team ID.');\n" + 
 							"window.location = 'index.jsp';"
 							+ "</script>"
 							+ "</body>"
