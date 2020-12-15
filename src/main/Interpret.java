@@ -82,28 +82,7 @@ public class Interpret extends HttpServlet {
 				try {
 			    sorted_map = new TreeMap<String, Team>(p.getTeamInfo());
 
-				writer.println("<html>");
-				writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
-						"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
-						"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script></head>");
-				writer.println("<body>");
-				writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
-						"      <div class=\"container\">\n" + 
-						"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
-						"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
-						"          <span class=\"navbar-toggler-icon\"></span>\n" + 
-						"        </button>\n" + 
-						"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
-						"          <ul class=\"navbar-nav\">\n" + 
-						"            <li class=\"nav-item\">\n" + 
-						"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
-						"            </li>\n" + 
-						"          </ul>\n" + 
-						"        </div>\n" + 
-						"      </div>\n" + 
-						"    </div>");
-				writer.println("<div class=\"container\">");
-				writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+			    scoreboardHTML1();
 				writer.println("<h4>Showing Team Detail for Team " + teamID + " as of " + new Date() + "</h4>");
 				writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
 				writer.println("<tr><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored<br>Images</th><th scope=\"col\">Play Time<br>hh:mm:ss</th><th scope=\"col\">Score Time<br>hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS<br>Score</th></tr>");
@@ -167,38 +146,7 @@ public class Interpret extends HttpServlet {
 						sorted_map = new TreeMap<String, Team>(comp);
 						sorted_map.putAll(map);
 						
-						writer.println("<html>");
-						writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
-								"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
-								"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>"
-								+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
-								"<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n" + 
-								"<script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>\n" + 
-								"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>"
-								+ "</head>");
-						writer.println("<body>");
-						writer.println("<script>\n" + 
-								"$(document).ready(function() {\n" + 
-								"    $('#generated').DataTable();\n" + 
-								"} );\n" + 
-								"</script>");
-						writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
-								"      <div class=\"container\">\n" + 
-								"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
-								"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
-								"          <span class=\"navbar-toggler-icon\"></span>\n" + 
-								"        </button>\n" + 
-								"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
-								"          <ul class=\"navbar-nav\">\n" + 
-								"            <li class=\"nav-item\">\n" + 
-								"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
-								"            </li>\n" + 
-								"          </ul>\n" + 
-								"        </div>\n" + 
-								"      </div>\n" + 
-								"    </div>");
-						writer.println("<div class=\"container\">");
-						writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+						scoreboardHTML1();
 						writer.println("<h4 id=\"tables\">Showing National Scoreboard as of " +  new Date() + "</h4>");
 						writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
 						writer.println("<tr><th scope=\"col\"></th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored Images</th><th scope=\"col\">Play Time hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS Score</th></tr></thead>");
@@ -210,11 +158,7 @@ public class Interpret extends HttpServlet {
 							}
 							writer.println("</tr>");
 						}
-						writer.println("</tbody>");
-						writer.println("</table>");
-						writer.println("</div></div></div></div>");
-						writer.println("</body>");
-						writer.println("</html>");
+						scoreboardHTML2();
 					}
 					if(parmLength == 1) {
 						
@@ -250,38 +194,7 @@ public class Interpret extends HttpServlet {
 					}
 					if(parmLength != 0) {
 						
-					writer.println("<html>");
-					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
-							"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
-							"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>"
-							+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
-							"<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n" + 
-							"<script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>\n" + 
-							"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>"
-							+ "</head>");
-					writer.println("<body>");
-					writer.println("<script>\n" + 
-							"$(document).ready(function() {\n" + 
-							"    $('#generated').DataTable();\n" + 
-							"} );\n" + 
-							"</script>");
-					writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
-								"      <div class=\"container\">\n" + 
-								"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
-								"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
-								"          <span class=\"navbar-toggler-icon\"></span>\n" + 
-								"        </button>\n" + 
-								"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
-								"          <ul class=\"navbar-nav\">\n" + 
-								"            <li class=\"nav-item\">\n" + 
-								"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
-								"            </li>\n" + 
-								"          </ul>\n" + 
-								"        </div>\n" + 
-								"      </div>\n" + 
-								"    </div>");
-					writer.println("<div class=\"container\">");
-					writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+					scoreboardHTML1();
 					writer.println("<h4>Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
 					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
 					writer.println("<tr><th scope=\"col\">National Place</th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Score Images</th><th scope=\"col\">Play Time (HH:MM)</th><th scope=\"col\">Warnings</th><th scope=\"col\">CCS Score</th><th scope=\"col\">Filtered Place</th></tr>");
@@ -301,105 +214,54 @@ public class Interpret extends HttpServlet {
 						writer.println("</tr>");
 						count++;
 					}
-					writer.println("</tbody>");
-					writer.println("</table>");
-					writer.println("</div></div></div></div>");
-					writer.println("</body>");
-					writer.println("</html>");
+					scoreboardHTML2();
 					}
 				}
-				//TODO
-				/*if(command.contains("!monitor")) {
-					int team1Current = p.getTeamTot(tID1);
-					int team2Current = p.getTeamTot(tID2);
-					Date team1Time = p.getTeamTime(tID1);
-					Date team2Time = p.getTeamTime(tID2);
-					//System.out.println(team1Current);
-					//System.out.println(team2Current);
-					
-					ArrayList<String[]> temp1 = null;
-					ArrayList<String[]> temp2 = null;
-					DateFormat dateFormat = new SimpleDateFormat("hh:mm");
-					String warningTime1 = "05:45";
-					Date warn1 = null;
-					try {
-						warn1 = dateFormat.parse(warningTime1);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					temp1 = p.getTeamboard(tID1);
-					writer.println("<html>");
-					writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"><meta http-equiv=\"refresh\" content=\"30\">");
-					writer.println("<script type=\"text/javascript\" src=\"notif.js\"></script>");
-					writer.println("</head>");
-					writer.println("<body>");
-					if(team1Current != team1Start) {
-						writer.println("<script>notifyMe(\"Team "+ tID1 + " has scoring changes\")</script>");
-						team1Start = team1Current;
-					}
-					if(team2Current != team2Start) {
-						writer.println("<script>notifyMe(\"Team "+ tID2 + " has scoring changes\")</script>");
-						team2Start = team2Current;
-					}
-					if(team1Time.compareTo(warn1) > 0) {
-						writer.println("<script>notifyMe(\"Team "+ tID1 + " has 15 minutes left!\")</script>");
-					}
-					if(team2Time.compareTo(warn1) > 0) {
-						writer.println("<script>notifyMe(\"Team "+ tID2 + " has 15 minutes left!\")</script>");
-					}
-					writer.println("<h2>Monitoring Team Detail for Team " + tID1 + " as of " + new Date() + "</h2>");
-					writer.println("<hr>");
-					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-					for(int r=0; r<2; r++) {
-						writer.println("<tr>");
-						for(int c=0; c<temp1.get(0).length; c++) {
-							writer.print("<td>"+temp1.get(r)[c]+"</td>");
-						}
-						writer.println("</tr>");
-					}
-					writer.println("</table>");
-					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-					writer.println("<br>");
-					for(int r=2; r<temp1.size(); r++) {
-						writer.println("<tr>");
-						for(int c=0; c<temp1.get(2).length; c++) {
-							writer.print("<td>"+temp1.get(r)[c]+"</td>");
-						}
-						writer.println("</tr>");
-					}
-					writer.println("</table>");
-					
-					temp2 = p.getTeamboard(tID2);
-					writer.println("<h2>Monitoring Team Detail for Team " + tID2 + " as of " + new Date() + "</h2>");
-					writer.println("<hr>");
-					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-					for(int r=0; r<2; r++) {
-						writer.println("<tr>");
-						for(int c=0; c<temp2.get(0).length; c++) {
-							writer.print("<td>"+temp2.get(r)[c]+"</td>");
-						}
-						writer.println("</tr>");
-					}
-					writer.println("</table>");
-					writer.println("<table border=\"4\" class='CSSTableGenerator'>");
-					writer.println("<br>");
-					for(int r=2; r<temp2.size(); r++) {
-						writer.println("<tr>");
-						for(int c=0; c<temp2.get(2).length; c++) {
-							writer.print("<td>"+temp2.get(r)[c]+"</td>");
-						}
-						writer.println("</tr>");
-					}
-					writer.println("</table>");
-					writer.println("</body>");
-					writer.println("</html>");
-					}*/
-				
-				
 			}
 		}
+	}
+	
+	public void scoreboardHTML1() {
+		writer.println("<html>");
+		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
+				"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
+				"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>"
+				+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
+				"<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n" + 
+				"<script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>\n" + 
+				"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>"
+				+ "</head>");
+		writer.println("<body>");
+		writer.println("<script>\n" + 
+				"$(document).ready(function() {\n" + 
+				"    $('#generated').DataTable();\n" + 
+				"} );\n" + 
+				"</script>");
+		writer.println("<div class=\"navbar navbar-expand-lg fixed-top navbar-dark bg-dark\">\n" + 
+				"      <div class=\"container\">\n" + 
+				"        <a href=\"\" class=\"navbar-brand\">CyberScoreServer</a>\n" + 
+				"        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\" aria-controls=\"navbarResponsive\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" + 
+				"          <span class=\"navbar-toggler-icon\"></span>\n" + 
+				"        </button>\n" + 
+				"        <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n" + 
+				"          <ul class=\"navbar-nav\">\n" + 
+				"            <li class=\"nav-item\">\n" + 
+				"              <a class=\"nav-link\" href=\"index.jsp\">Back to Main Menu</a>\n" + 
+				"            </li>\n" + 
+				"          </ul>\n" + 
+				"        </div>\n" + 
+				"      </div>\n" + 
+				"    </div>");
+		writer.println("<div class=\"container\">");
+		writer.println("<div class=\"row\"><div class=\"col-lg-12\"><div class=\"page-header\">");
+	}
+	
+	public void scoreboardHTML2() {
+		writer.println("</tbody>");
+		writer.println("</table>");
+		writer.println("</div></div></div></div>");
+		writer.println("</body>");
+		writer.println("</html>");
 	}
 	
 	public Object determineCmd(String parm) {
