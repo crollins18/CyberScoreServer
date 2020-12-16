@@ -17,12 +17,15 @@
       String base = null;
       String prefix = null;
       try {
-              	base = "<b>" + in.nextLine() + "</b>"; 
-        		prefix = "<b>" + in.nextLine() + "</b>";
+              	base = "<div class=\"alert alert-dismissible alert-success\">\n" + 
+            			"  <strong>Current Scoreboard URL: </strong>" + in.nextLine() + 
+            			"</div>"; 
+        		prefix = "<div class=\"alert alert-dismissible alert-success\">\n" + 
+            			"  <strong>Current Team Prefix: </strong>" + in.nextLine() + "</div>";
         }
       catch (Exception e){
-    			base = "<div class = \"warning\">Please set the scoreboard URL on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>";
-    			prefix = "<div class = \"warning\">Please set the team prefix on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>";
+    			base = "<div class=\"alert alert-dismissible alert-danger\"><strong>Oh snap!</strong> <a href=\"board-admin\" class=\"alert-link\">Set server preferences to get started</a> and try again.</div>";
+    			prefix = "";
     	}
 	%>
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -40,27 +43,36 @@
         </div>
       </div>
     </div>
-	
+    <div class="container">
+		<div class="jumbotron">
+		  <h1 class="display-3">Hello world!</h1>
+		  <p class="lead">This is a simple web app to parse and filter the public Cyberpatriot scoreboard during competitions!</p>
+		  <p>Created by Cyberpatriot alumni Caleb Rollins</p>
+		</div>
+	</div>
     <div class="container">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
           <% 
-          if (!base.equals("<div class = \"warning\">Please set the scoreboard URL on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>") && !prefix.equals("<div class = \"warning\">Please set the team prefix on the <a class = \"warning\" href=\"board-admin\">SERVER CONFIGURATION page</a></div>")) {
+          if (!base.equals("<div class=\"alert alert-dismissible alert-danger\"><strong>Oh snap!</strong> <a href=\"board-admin\" class=\"alert-link\">Set server preferences to get started</a> and try again.</div>")) {
           %>
-            <div class="bs-component">
-              <form name="commandline" method="post" action="go">
+        <div class="card text-white bg-primary mb-3">
+  			<div class="card-header">Send Command</div>
+			<div class="card-body">
+    		  <form name="commandline" method="post" action="go">
                 <fieldset>
-                  <legend>Send Command</legend>
                   <div class="form-group row">
-                    <label for="commandIn" class="col-sm-2 col-form-label">Command</label>
-                    <div class="col-sm-10">
+                    <label for="commandIn" class="col-sm-2 col-form-label">Input</label>
+                    <div class="col-sm-8">
                       <input type="text" name="commandIn" value="!help">
                     </div>
                   </div>
                   <input type="submit" value="Submit" />
                 </fieldset>
               </form>
-            </div>
+  			</div>
+		</div>
+
           <%}
           else {}
           %>
@@ -68,8 +80,8 @@
           </div>
           
           <div class="container">
-          <p>Current Scoreboard URL: <%=base%></p>
-          <p>Team Prefix: <%=prefix%></p>
+          <%=base%>
+          <%=prefix%>
         </div>
         
        </div>
