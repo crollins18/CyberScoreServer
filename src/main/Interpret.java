@@ -86,7 +86,12 @@ public class Interpret extends HttpServlet {
 
 			    scoreboardHTML1();
 				writer.println("<h4>Showing Team Detail for Team " + teamID + " as of " + new Date() + "</h4>");
-				writer.println("</div><div class=\"bs-component\"><table class=\"table table-hover\"><thead>");
+				writer.println("</div><div class=\"bs-component\">");
+				
+				writer.println("<div class=\"card border-primary mb-3\">\n" + 
+						"  <div class=\"card-header\">Team Overview</div>\n" + 
+						"  <div class=\"card-body\">");
+				writer.println("<div class=\"table-responsive\"><table class=\"table table-hover\"><thead>");
 				writer.println("<tr><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored<br>Images</th><th scope=\"col\">Play Time<br>hh:mm:ss</th><th scope=\"col\">Score Time<br>hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS<br>Score</th></tr>");
 				writer.println("</thead><tbody>");
 				
@@ -99,7 +104,13 @@ public class Interpret extends HttpServlet {
 				}
 				writer.println("</tbody>");
 				writer.println("</table>");
+				writer.println("</div>");
+				writer.println("</div></div>");
 				
+				writer.println("<div class=\"card border-primary mb-3\">\n" + 
+						"  <div class=\"card-header\">Image Details</div>\n" + 
+						"  <div class=\"card-body\">");
+				writer.println("<div class=\"table-responsive\">");
 				writer.println("<table class=\"table table-hover\"><thead>");
 				writer.println("<tr><th scope=\"col\">Image</th><th scope=\"col\">Time</th><th scope=\"col\">Found</th><th scope=\"col\">Remaining</th><th scope=\"col\">Penalties</th><th scope=\"col\">Score</th><th scope=\"col\">**</th></tr>");
 				writer.println("</thead><tbody>");
@@ -115,7 +126,7 @@ public class Interpret extends HttpServlet {
 				}
 				writer.println("</tbody>");
 				writer.println("</table>");
-				writer.println("</div></div></div></div>");
+				writer.println("</div></div></div></div></div></div></div>");
 
 				
 				writer.println("</body>");
@@ -216,7 +227,7 @@ public class Interpret extends HttpServlet {
 					if(parmLength != 0) {
 						
 					scoreboardHTML1();
-					writer.println("<h4>Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
+					writer.println("<h4 id=\"tables\">Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
 					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered table-responsive\" style=\"width:100%\"><thead>");
 					ArrayList<String> header = map.get("").getInfo();
 					writer.println("<tr>");
