@@ -162,14 +162,22 @@ public class Interpret extends HttpServlet {
 						scoreboardHTML1();
 						writer.println("<h4 id=\"tables\">Showing National Scoreboard as of " +  new Date() + "</h4>");
 						writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
-						writer.println("<tr><th scope=\"col\"></th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored Images</th><th scope=\"col\">Play Time hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS Score</th></tr></thead>");
+						ArrayList<String> header = map.get("").getInfo();
+						writer.println("<tr>");
+						for(int j=0; j<header.size(); j++) {
+							writer.println("<th scope=\"col\">" + header.get(j) + "</th>");
+						}
+						writer.println("</tr>");
+						writer.println("</thead>");
 						writer.println("<tbody>");
 						for (Team row: sorted_map.values()) {
-							writer.println("<tr class=\"table-secondary\">");
-							for(int i=0; i<row.getInfo().size(); i++) {
-								writer.print("<td>"+row.getInfo().get(i)+"</td>");
+							if(!row.getPlace().equals("")) {
+								writer.println("<tr class=\"table-secondary\">");
+								for(int i=0; i<row.getInfo().size(); i++) {
+									writer.print("<td>"+row.getInfo().get(i)+"</td>");
+								}
+								writer.println("</tr>");	
 							}
-							writer.println("</tr>");
 						}
 						scoreboardHTML2();
 					}
@@ -210,22 +218,28 @@ public class Interpret extends HttpServlet {
 					scoreboardHTML1();
 					writer.println("<h4>Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
 					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
-					writer.println("<tr><th scope=\"col\">National Place</th><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Score Images</th><th scope=\"col\">Play Time (HH:MM)</th><th scope=\"col\">Warnings</th><th scope=\"col\">CCS Score</th><th scope=\"col\">Filtered Place</th></tr>");
+					ArrayList<String> header = map.get("").getInfo();
+					writer.println("<tr>");
+					for(int j=0; j<header.size(); j++) {
+						writer.println("<th scope=\"col\">" + header.get(j) + "</th>");
+					}
+					writer.println("<th scope=\"col\">Filtered Place</th>");
+					writer.println("</tr>");
 					writer.println("</thead><tbody>");
-					
 					
 					int count = 1;
 					for (Team row: sorted_map.values()) {
-						writer.println("<tr class=\"table-secondary\">");
-						for(int i=0; i<row.getInfo().size(); i++) {
-							writer.print("<td>"+row.getInfo().get(i)+"</td>");
+						if(!row.getPlace().equals("")) {
+							writer.println("<tr class=\"table-secondary\">");
+							for(int i=0; i<row.getInfo().size(); i++) {
+								writer.print("<td>"+row.getInfo().get(i)+"</td>");
+							}
+							writer.println("<td>");
+							writer.println(count);
+							writer.println("</td>");
+							writer.println("</tr>");
+							count++;
 						}
-						writer.println("<td>");
-						writer.println(count);
-						writer.println("</td>");
-
-						writer.println("</tr>");
-						count++;
 					}
 					scoreboardHTML2();
 					}

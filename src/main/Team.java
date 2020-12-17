@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Team {
 	
-	private String place;
+	private String place = "";
 	private String teamNum;
 	private String state;
 	private String division;
@@ -15,7 +15,15 @@ public class Team {
 	private String warnings;
 	private String totScore;
 	
+	private String adjustment;
+	private String cisco;
+	private String finalscore;
+	
 	private ArrayList<String> teamInfo;
+	
+	public Team() {
+		teamInfo = new ArrayList<String>();
+	}
 	
 	public Team (String str1, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, int construct) {
 		if(construct == 1) {
@@ -62,6 +70,56 @@ public class Team {
 		}
 	}
 	
+	public void add(String in, int colNum) {
+		if(colNum == 1) {
+			place = in;
+			teamInfo.add(place);
+		}
+		if(colNum == 2) {
+			teamNum = in;
+			teamInfo.add(teamNum);
+		}
+		if(colNum == 3) {
+			state = in;
+			teamInfo.add(state);
+		}
+		if(colNum == 4) {
+			division = in;
+			teamInfo.add(division);
+		}
+		if(colNum == 5) {
+			tier = in;
+			teamInfo.add(tier);
+		}
+		if(colNum == 6) {
+			images = in;
+			teamInfo.add(images);
+		}
+		if(colNum == 7) {
+			playTime = in;
+			teamInfo.add(playTime);
+		}
+		if(colNum == 8) {
+			warnings = in;
+			teamInfo.add(warnings);
+		}
+		if(colNum == 9) {
+			totScore = in;
+			teamInfo.add(totScore);
+		}
+		if(colNum == 10) {
+			adjustment = in;
+			teamInfo.add(adjustment);
+		}
+		if(colNum == 11) {
+			cisco = in;
+			teamInfo.add(cisco);
+		}
+		if(colNum == 12) {
+			finalscore = in;
+			teamInfo.add(finalscore);
+		}
+	}
 	public String get(int row) {
 		String result = "";
 		if(row == 2) {
@@ -80,12 +138,8 @@ public class Team {
 		return teamInfo;
 	}
 	
-	public int getPlace() {
-		return Integer.parseInt(place);
+	public String getPlace() {
+		return place;
 	}
 	
-	public static void main (String[] args) {
-		Team t = new Team("3", "13-1000", "MO", "Open", "High School", "3", "04:51:56", "", "300", 1);
-		Team u = new Team("4", "13-1243", "CA", "Open", "High School", "3", "05:34:02", "", "300", 1);
-	}
 }

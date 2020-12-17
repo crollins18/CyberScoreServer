@@ -7,6 +7,7 @@ import java.util.Map.*;
 
 import org.jsoup.*;
 import org.jsoup.nodes.*;
+import org.jsoup.select.Elements;
 
 public class processScores {
 	
@@ -102,19 +103,15 @@ public class processScores {
 		scoreboard = new HashMap<String, Team>();
 		
 		for (Element row : document.select("table.CSSTableGenerator tr")) {
-			final String place = row.select("td:nth-of-type(1)").text();
-			final String teamNum = row.select("td:nth-of-type(2)").text();
-			final String state = row.select("td:nth-of-type(3)").text();
-			final String division = row.select("td:nth-of-type(4)").text();
-			final String tier = row.select("td:nth-of-type(5)").text();
-			final String images = row.select("td:nth-of-type(6)").text();
-			final String playTime = row.select("td:nth-of-type(7)").text();
-			final String warnings = row.select("td:nth-of-type(8)").text();
-			final String totScore = row.select("td:nth-of-type(9)").text();
-			Team tempTeam = new Team(place, teamNum, state, division, tier, images, playTime, warnings, totScore, 1);
-			scoreboard.put(place, tempTeam);
+			Team t = new Team();
+			Elements cols = row.select("td");
+			for(int i=0; i<cols.size(); i++) {
+				t.add(cols.get(i).text(), (i+1));
+			}
+			
+			scoreboard.put(t.getPlace(), t);
 		}
-		scoreboard.remove("");
+		//scoreboard.remove("");
 		return scoreboard;
 	}
 	
@@ -126,6 +123,9 @@ public class processScores {
 		}
 		int i = 1;
 	    for (Entry<String, Team> entry : scoreboard.entrySet()) {
+	    	if(entry.getValue().getPlace().equals("")) {
+	    		filtered.put(entry.getValue().getPlace(), entry.getValue());
+	    	}
 	        if(s1.toString().equals(entry.getValue().get(s1.getRow()))){
 	            filtered.put(String.valueOf(i), entry.getValue());
 	            i += 1;
@@ -146,6 +146,9 @@ public class processScores {
 		}
 		int i = 1;
 	    for (Entry<String, Team> entry : scoreboard.entrySet()) {
+	    	if(entry.getValue().getPlace().equals("")) {
+	    		filtered.put(entry.getValue().getPlace(), entry.getValue());
+	    	}
 	        if(s1.toString().equals(entry.getValue().get(s1.getRow())) && s2.toString().equals(entry.getValue().get(s2.getRow()))){
 	            filtered.put(String.valueOf(i), entry.getValue());
 	            i += 1;
@@ -170,6 +173,9 @@ public class processScores {
 		}
 		int i = 1;
 	    for (Entry<String, Team> entry : scoreboard.entrySet()) {
+	    	if(entry.getValue().getPlace().equals("")) {
+	    		filtered.put(entry.getValue().getPlace(), entry.getValue());
+	    	}
 	        if(s1.toString().equals(entry.getValue().get(s1.getRow())) && s2.toString().equals(entry.getValue().get(s2.getRow())) && s3.toString().equals(entry.getValue().get(s3.getRow()))){
 	            filtered.put(String.valueOf(i), entry.getValue());
 	            i += 1;
