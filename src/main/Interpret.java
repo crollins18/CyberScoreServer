@@ -161,7 +161,7 @@ public class Interpret extends HttpServlet {
 						
 						scoreboardHTML1();
 						writer.println("<h4 id=\"tables\">Showing National Scoreboard as of " +  new Date() + "</h4>");
-						writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
+						writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered table-responsive\" style=\"width:100%\"><thead>");
 						ArrayList<String> header = map.get("").getInfo();
 						writer.println("<tr>");
 						for(int j=0; j<header.size(); j++) {
@@ -217,7 +217,7 @@ public class Interpret extends HttpServlet {
 						
 					scoreboardHTML1();
 					writer.println("<h4>Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
-					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered\" style=\"width:100%\"><thead>");
+					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered table-responsive\" style=\"width:100%\"><thead>");
 					ArrayList<String> header = map.get("").getInfo();
 					writer.println("<tr>");
 					for(int j=0; j<header.size(); j++) {
