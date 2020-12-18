@@ -70,55 +70,108 @@ public class Team {
 		}
 	}
 	
-	public void add(String in, int colNum) {
-		if(colNum == 1) {
-			place = in;
-			teamInfo.add(place);
+	public void add(String in, int colNum, int construct) {
+		if(construct == 1) {
+			if(colNum == 1) {
+				place = in;
+				teamInfo.add(place);
+			}
+			if(colNum == 2) {
+				teamNum = in;
+				teamInfo.add(teamNum);
+			}
+			if(colNum == 3) {
+				state = in;
+				teamInfo.add(state);
+			}
+			if(colNum == 4) {
+				division = in;
+				teamInfo.add(division);
+			}
+			if(colNum == 5) {
+				tier = in;
+				teamInfo.add(tier);
+			}
+			if(colNum == 6) {
+				images = in;
+				teamInfo.add(images);
+			}
+			if(colNum == 7) {
+				playTime = in;
+				teamInfo.add(playTime);
+			}
+			if(colNum == 8) {
+				warnings = in;
+				teamInfo.add(warnings);
+			}
+			if(colNum == 9) {
+				totScore = in;
+				teamInfo.add(totScore);
+			}
+			if(colNum == 10) {
+				adjustment = in;
+				teamInfo.add(adjustment);
+			}
+			if(colNum == 11) {
+				cisco = in;
+				teamInfo.add(cisco);
+			}
+			if(colNum == 12) {
+				finalscore = in;
+				teamInfo.add(finalscore);
+			}
 		}
-		if(colNum == 2) {
-			teamNum = in;
-			teamInfo.add(teamNum);
+		if(construct == 2) {
+			if(colNum == 1) {
+				teamNum = in;
+				teamInfo.add(teamNum);
+			}
+			if(colNum == 2) {
+				state = in;
+				teamInfo.add(state);
+			}
+			if(colNum == 3) {
+				division = in;
+				teamInfo.add(division);
+			}
+			if(colNum == 4) {
+				tier = in;
+				teamInfo.add(tier);
+			}
+			if(colNum == 5) {
+				images = in;
+				teamInfo.add(images);
+			}
+			if(colNum == 6) {
+				playTime = in;
+				teamInfo.add(playTime);
+			}
+			if(colNum == 7) {
+				scoreTime = in;
+				teamInfo.add(scoreTime);
+			}
+			if(colNum == 8) {
+				warnings = in;
+				teamInfo.add(warnings);
+			}
+			if(colNum == 9) {
+				totScore = in;
+				teamInfo.add(totScore);
+			}
+			if(colNum == 10) {
+				adjustment = in;
+				teamInfo.add(adjustment);
+			}
+			if(colNum == 11) {
+				cisco = in;
+				teamInfo.add(cisco);
+			}
+			if(colNum == 12) {
+				finalscore = in;
+				teamInfo.add(finalscore);
+			}
 		}
-		if(colNum == 3) {
-			state = in;
-			teamInfo.add(state);
-		}
-		if(colNum == 4) {
-			division = in;
-			teamInfo.add(division);
-		}
-		if(colNum == 5) {
-			tier = in;
-			teamInfo.add(tier);
-		}
-		if(colNum == 6) {
-			images = in;
-			teamInfo.add(images);
-		}
-		if(colNum == 7) {
-			playTime = in;
-			teamInfo.add(playTime);
-		}
-		if(colNum == 8) {
-			warnings = in;
-			teamInfo.add(warnings);
-		}
-		if(colNum == 9) {
-			totScore = in;
-			teamInfo.add(totScore);
-		}
-		if(colNum == 10) {
-			adjustment = in;
-			teamInfo.add(adjustment);
-		}
-		if(colNum == 11) {
-			cisco = in;
-			teamInfo.add(cisco);
-		}
-		if(colNum == 12) {
-			finalscore = in;
-			teamInfo.add(finalscore);
-		}
+		
 	}
 	public String get(int row) {
 		String result = "";
@@ -140,6 +193,9 @@ public class Team {
 	
 	public String getPlace() {
 		return place;
+	}
+	public String getTeamNum() {
+		return teamNum;
 	}
 	
 }

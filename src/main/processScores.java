@@ -52,22 +52,12 @@ public class processScores {
 			teamImages = new HashMap<String, ArrayList<String>>();
 			for (Element row : document.select("table.CSSTableGenerator:nth-of-type(1) tr")) {
 				
-				final String teamNum = row.select("td:nth-of-type(1)").text();
-				final String state = row.select("td:nth-of-type(2)").text();
-				final String division = row.select("td:nth-of-type(3)").text();
-				final String tier = row.select("td:nth-of-type(4)").text();
-				final String images = row.select("td:nth-of-type(5)").text();
-				final String playTime = row.select("td:nth-of-type(6)").text();
-				final String scoreTime = row.select("td:nth-of-type(7)").text();
-				final String warnings = row.select("td:nth-of-type(8)").text();
-				final String totScore= row.select("td:nth-of-type(9)").text();
-				
-				Team tempTeam = new Team(teamNum, state, division, tier, images, playTime, scoreTime, warnings, totScore, 2);
-				teamInfo.put(teamNum, tempTeam);
-							
-				if(tempTeam.getInfo().get(0).equals("Team Number")) {
-					teamInfo.remove(tempTeam.getInfo().get(0));
+				Team t = new Team();
+				Elements cols = row.select("td");
+				for(int i=0; i<cols.size(); i++) {
+					t.add(cols.get(i).text(), (i+1), 2);
 				}
+				teamInfo.put(t.getTeamNum(), t);
 	
 			}	
 			
@@ -106,7 +96,7 @@ public class processScores {
 			Team t = new Team();
 			Elements cols = row.select("td");
 			for(int i=0; i<cols.size(); i++) {
-				t.add(cols.get(i).text(), (i+1));
+				t.add(cols.get(i).text(), (i+1), 1);
 			}
 			
 			scoreboard.put(t.getPlace(), t);

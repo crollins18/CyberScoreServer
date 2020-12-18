@@ -92,15 +92,24 @@ public class Interpret extends HttpServlet {
 						"  <div class=\"card-header\">Team Overview</div>\n" + 
 						"  <div class=\"card-body\">");
 				writer.println("<div class=\"table-responsive\"><table class=\"table table-hover\"><thead>");
-				writer.println("<tr><th scope=\"col\">Team Number</th><th scope=\"col\">Location/Category</th><th scope=\"col\">Division</th><th scope=\"col\">Tier</th><th scope=\"col\">Scored<br>Images</th><th scope=\"col\">Play Time<br>hh:mm:ss</th><th scope=\"col\">Score Time<br>hh:mm:ss</th><th scope=\"col\">**</th><th scope=\"col\">CCS<br>Score</th></tr>");
+				ArrayList<String> header = sorted_map.lastEntry().getValue().getInfo();
+				writer.println("<tr>");
+				for(int j=0; j<header.size(); j++) {
+					writer.println("<th scope=\"col\">" + header.get(j) + "</th>");
+				}
+				writer.println("</tr>");
+				
 				writer.println("</thead><tbody>");
 				
 				for (Team row: sorted_map.values()) {
-					writer.println("<tr class=\"table-secondary\">");
-					for(int i=0; i<row.getInfo().size(); i++) {
-						writer.print("<td>"+row.getInfo().get(i)+"</td>");
+				System.out.println(row.getTeamNum());
+					if(!row.getTeamNum().equals("Team Number")) {
+						writer.println("<tr class=\"table-secondary\">");
+						for(int i=0; i<row.getInfo().size(); i++) {
+							writer.print("<td>"+row.getInfo().get(i)+"</td>");
+						}
+						writer.println("</tr>");
 					}
-					writer.println("</tr>");
 				}
 				writer.println("</tbody>");
 				writer.println("</table>");
@@ -173,7 +182,7 @@ public class Interpret extends HttpServlet {
 						scoreboardHTML1();
 						writer.println("<h4 id=\"tables\">Showing National Scoreboard as of " +  new Date() + "</h4>");
 						writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered table-responsive\" style=\"width:100%\"><thead>");
-						ArrayList<String> header = map.get("").getInfo();
+						ArrayList<String> header = sorted_map.firstEntry().getValue().getInfo();
 						writer.println("<tr>");
 						for(int j=0; j<header.size(); j++) {
 							writer.println("<th scope=\"col\">" + header.get(j) + "</th>");
@@ -229,7 +238,7 @@ public class Interpret extends HttpServlet {
 					scoreboardHTML1();
 					writer.println("<h4 id=\"tables\">Showing Filtered Scoreboard as of " +  new Date() + "</h4>");
 					writer.println("</div><div class=\"bs-component\"><table id=\"generated\" class=\"table table-striped table-bordered table-responsive\" style=\"width:100%\"><thead>");
-					ArrayList<String> header = map.get("").getInfo();
+					ArrayList<String> header = sorted_map.firstEntry().getValue().getInfo();
 					writer.println("<tr>");
 					for(int j=0; j<header.size(); j++) {
 						writer.println("<th scope=\"col\">" + header.get(j) + "</th>");
