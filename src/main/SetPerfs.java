@@ -59,12 +59,40 @@ public class SetPerfs extends HttpServlet {
 		p.println(url);
 		p.println(prefix);
 		p.close();
-		writer.println("<html>"
-				+ "<body>"
-				+ "<script>"
-				+ "alert('Server preferences have been set successfully');\n" + 
-				"window.location = '../';"
+		writer.println("<html>");
+		writer.println("<head>" + "<link rel=\"stylesheet\" href=\"../bootstrap.css\">\n" + 
+				"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
+				"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
+				+ "<script>$(window).load(function()\n" + 
+				"{\n" + 
+				"    $('#myModal').modal('show');\n" + 
+				"});"
 				+ "</script>"
+				+ "</head>");
+		writer.println("<body>\n" +
+				"<div class=\"container\">\n" + 
+				"\n" + 
+				"  <!-- Modal -->\n" + 
+				"  <div class=\"modal\" id=\"myModal\">\n" + 
+				"    <div class=\"modal-dialog\" role=\"document\">\n" + 
+				"    \n" + 
+				"      <!-- Modal content-->\n" + 
+				"      <div class=\"modal-content\">\n" + 
+				"        <div class=\"modal-header\">\n" + 
+				"          <h5 class=\"modal-title\">Yay!</h5>\n" +
+				"        </div>\n" + 
+				"        <div class=\"modal-body\">\n" + 
+				"          <p>Server preferences have been set successfully.</p>\n" + 
+				"        </div>\n" + 
+				"        <div class=\"modal-footer\">\n" + 
+				"          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick=\"window.location='../';\">Okay</button>\n" + 
+				"        </div>\n" + 
+				"      </div>\n" + 
+				"      \n" + 
+				"    </div>\n" + 
+				"  </div>\n" + 
+				"  \n" + 
+				"</div>"
 				+ "</body>"
 				+ "</html>");
 	}

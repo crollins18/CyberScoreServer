@@ -36,12 +36,40 @@ public class Interpret extends HttpServlet {
 		// TODO Auto-generated method stub
 		writer = response.getWriter();
 		if(command == null) {
-			writer.println("<html>"
-					+ "<body>"
-					+ "<script>"
-					+ "alert('Please go to the main menu to send a command first');\n" + 
-					"window.location = 'index.jsp';"
+			writer.println("<html>");
+			writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
+					"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
+					"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
+					+ "<script>$(window).load(function()\n" + 
+					"{\n" + 
+					"    $('#myModal').modal('show');\n" + 
+					"});"
 					+ "</script>"
+					+ "</head>");
+			writer.println("<body>\n" +
+					"<div class=\"container\">\n" + 
+					"\n" + 
+					"  <!-- Modal -->\n" + 
+					"  <div class=\"modal\" id=\"myModal\">\n" + 
+					"    <div class=\"modal-dialog\" role=\"document\">\n" + 
+					"    \n" + 
+					"      <!-- Modal content-->\n" + 
+					"      <div class=\"modal-content\">\n" + 
+					"        <div class=\"modal-header\">\n" + 
+					"          <h5 class=\"modal-title\">Not so fast!</h5>\n" +
+					"        </div>\n" + 
+					"        <div class=\"modal-body\">\n" + 
+					"          <p>Please go to the main menu to send a command first.</p>\n" + 
+					"        </div>\n" + 
+					"        <div class=\"modal-footer\">\n" + 
+					"          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick=\"window.location='index.jsp';\">Okay</button>\n" + 
+					"        </div>\n" + 
+					"      </div>\n" + 
+					"      \n" + 
+					"    </div>\n" + 
+					"  </div>\n" + 
+					"  \n" + 
+					"</div>"
 					+ "</body>"
 					+ "</html>");
 		}
@@ -142,23 +170,79 @@ public class Interpret extends HttpServlet {
 				writer.println("</html>");
 				}
 				catch (Exception e){
-					writer.println("<html>"
-							+ "<body>"
-							+ "<script>"
-							+ "alert('The team number you entered does not exist or the URL you specified for a Cyberpatriot Scoreboard is invalid.');\n" + 
-							"window.location = 'index.jsp';"
+					writer.println("<html>");
+					writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
+							"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
+							"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
+							+ "<script>$(window).load(function()\n" + 
+							"{\n" + 
+							"    $('#myModal').modal('show');\n" + 
+							"});"
 							+ "</script>"
+							+ "</head>");
+					writer.println("<body>\n" +
+							"<div class=\"container\">\n" + 
+							"\n" + 
+							"  <!-- Modal -->\n" + 
+							"  <div class=\"modal\" id=\"myModal\">\n" + 
+							"    <div class=\"modal-dialog\" role=\"document\">\n" + 
+							"    \n" + 
+							"      <!-- Modal content-->\n" + 
+							"      <div class=\"modal-content\">\n" + 
+							"        <div class=\"modal-header\">\n" + 
+							"          <h5 class=\"modal-title\">Hmmmm</h5>\n" +
+							"        </div>\n" + 
+							"        <div class=\"modal-body\">\n" + 
+							"          <p>The team number you entered does not exist or the URL you specified for a Cyberpatriot Scoreboard is invalid.</p>\n" + 
+							"        </div>\n" + 
+							"        <div class=\"modal-footer\">\n" + 
+							"          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick=\"window.location='index.jsp';\">Okay</button>\n" + 
+							"        </div>\n" + 
+							"      </div>\n" + 
+							"      \n" + 
+							"    </div>\n" + 
+							"  </div>\n" + 
+							"  \n" + 
+							"</div>"
 							+ "</body>"
 							+ "</html>");
 					}
 				}
 				catch (Exception e) {
-					writer.println("<html>"
-							+ "<body>"
-							+ "<script>"
-							+ "alert('Error parsing team ID from command. When using the !team command make sure to provide the last four of the team ID.');\n" + 
-							"window.location = 'index.jsp';"
+					writer.println("<html>");
+					writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
+							"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
+							"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
+							+ "<script>$(window).load(function()\n" + 
+							"{\n" + 
+							"    $('#myModal').modal('show');\n" + 
+							"});"
 							+ "</script>"
+							+ "</head>");
+					writer.println("<body>\n" +
+							"<div class=\"container\">\n" + 
+							"\n" + 
+							"  <!-- Modal -->\n" + 
+							"  <div class=\"modal\" id=\"myModal\">\n" + 
+							"    <div class=\"modal-dialog\" role=\"document\">\n" + 
+							"    \n" + 
+							"      <!-- Modal content-->\n" + 
+							"      <div class=\"modal-content\">\n" + 
+							"        <div class=\"modal-header\">\n" + 
+							"          <h5 class=\"modal-title\">Uh oh!</h5>\n" +
+							"        </div>\n" + 
+							"        <div class=\"modal-body\">\n" + 
+							"          <p>Error parsing team ID from command. When using the !team command make sure to provide the last four of the team ID.</p>\n" + 
+							"        </div>\n" + 
+							"        <div class=\"modal-footer\">\n" + 
+							"          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\" onclick=\"window.location='index.jsp';\">Okay</button>\n" + 
+							"        </div>\n" + 
+							"      </div>\n" + 
+							"      \n" + 
+							"    </div>\n" + 
+							"  </div>\n" + 
+							"  \n" + 
+							"</div>"
 							+ "</body>"
 							+ "</html>");
 				}
