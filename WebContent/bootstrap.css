@@ -4783,6 +4783,7 @@ input[type="button"].btn-block {
 
 .card-whiteback {
   background-color: white;
+  height: 750px;
 }
 
 .card-title {

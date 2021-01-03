@@ -60,7 +60,9 @@ public class SetPerfs extends HttpServlet {
 		p.println(prefix);
 		p.close();
 		writer.println("<html>");
-		writer.println("<head>" + "<link rel=\"stylesheet\" href=\"../bootstrap.css\">\n" + 
+		writer.println("<head>" + "<meta charset=\"utf-8\">\n" + 
+				"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+				+ "<link rel=\"stylesheet\" href=\"../bootstrap.css\">\n" + 
 				"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
 				"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
 				+ "<script>$(window).load(function()\n" + 

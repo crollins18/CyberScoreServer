@@ -34,7 +34,9 @@ public class Interpret extends HttpServlet {
 		writer = response.getWriter();
 		if(command == null) {
 			writer.println("<html>");
-			writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
+			writer.println("<head>" + "<meta charset=\"utf-8\">\n" + 
+					"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+					+ "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
 					"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
 					"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
 					+ "<script>$(window).load(function()\n" + 
@@ -182,7 +184,7 @@ public class Interpret extends HttpServlet {
 				innerData = innerData + "{\n" +						
 				"      label: '" + headerRowGraph.get(j) + "',\n" +
 				//"      backgroundColor: 'black',\n" + 
-				"      borderColor: 'black',\n" + 
+				"      borderColor: colorArray[" + (j-1) + "],\n" + 
 				"      fill: false,\n" + 
 				"      data: [\n";
 				for(int h=0; h<tempGraphData.size(); h++) {
@@ -196,7 +198,8 @@ public class Interpret extends HttpServlet {
 						"    'red',\n" + 
 						"    'green',\n" + 
 						"    'blue',\n" + 
-						"    'black'\n" + 
+						"    'black',\n" + 
+						"    'yellow'\n" + 
 						"];\n"
 						+ "new Chart(document.getElementById('canvas'), {\n" + 
 						"  type: 'line',\n" + 
@@ -206,6 +209,8 @@ public class Interpret extends HttpServlet {
 						"]\n" + 
 						"  },\n" + 
 						"  options: {\n" + 
+						"    maintainAspectRatio: false," +
+						"    responsive: true," +
 						"    title: {\n" + 
 						"      text: 'Time Scale'\n" + 
 						"    },\n" +
@@ -247,7 +252,9 @@ public class Interpret extends HttpServlet {
 				}
 				catch (Exception e){
 					writer.println("<html>");
-					writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
+					writer.println("<head>" + "<meta charset=\"utf-8\">\n" + 
+							"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+							+ "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
 							"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
 							"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
 							+ "<script>$(window).load(function()\n" + 
@@ -287,7 +294,9 @@ public class Interpret extends HttpServlet {
 				catch (Exception e) {
 					e.printStackTrace();
 					writer.println("<html>");
-					writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
+					writer.println("<head>" + "<meta charset=\"utf-8\">\n" + 
+							"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+							+ "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
 							"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
 							"<script src=\"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>\n" 
 							+ "<script>$(window).load(function()\n" + 
@@ -431,7 +440,9 @@ public class Interpret extends HttpServlet {
 	
 	public void scoreboardHTML1() {
 		writer.println("<html>");
-		writer.println("<head><link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
+		writer.println("<head>" + "<meta charset=\"utf-8\">\n" + 
+				"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+				+ "<link rel=\"stylesheet\" type=\"text/css\" href=\"bootstrap.css\"><meta http-equiv=\"refresh\" content=\"30\"><script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n" + 
 				"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n" + 
 				"<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>"
 				+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
