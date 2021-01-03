@@ -4,6 +4,7 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.util.Map.*;
+import org.json.*;
 
 import org.jsoup.*;
 import org.jsoup.nodes.*;
@@ -18,12 +19,15 @@ public class processScores {
 	private HashMap<String, Team> scoreboard;
 	private HashMap<String, Team> teamInfo;
 	private HashMap<String, ArrayList<String>> teamImages;
+	private ArrayList<ArrayList<String>> teamGraphData;
 	private HashMap<String, Team> filtered;
+	private boolean localMode;
 	
-	public processScores(String context) throws FileNotFoundException {
+	public processScores(String context, boolean localMode) throws FileNotFoundException {
 		in = new Scanner(new File(context + "/board-admin/url.dat"));
 		base = in.nextLine();
 		prefix = in.nextLine();
+		this.localMode = localMode;
 	}
 	
 	public void getTeamboard(String teamID) {
@@ -31,7 +35,12 @@ public class processScores {
 		if(!base.substring(base.length()-1).equals("/")) {
 			mid = "/";
 		}
-		extended = base + mid + "team.php?team=" + prefix + teamID;
+		if(localMode) {
+			extended = base + mid + "team.html";
+		}
+		else {
+			extended = base + mid + "team.php?team=" + prefix + teamID;
+		}
 		
 		Document document = null;
 		try {
@@ -77,6 +86,36 @@ public class processScores {
 					teamImages.remove(tempImages.get(0));
 				}
 			}
+			
+			String rawChart = document.getElementsByTag("script").get(document.getElementsByTag("script").size()-1).toString();
+			String cleanChartData = rawChart.substring(rawChart.indexOf("([")+1, rawChart.indexOf("]);"));
+			cleanChartData = cleanChartData.replaceAll("'","\"");
+			String jsonString = "{\n" + "   \"data\":" + cleanChartData + "]}";
+			
+			JSONObject col;
+			teamGraphData = new ArrayList<ArrayList<String>>();
+			try {
+				col = new JSONObject(jsonString);
+				JSONArray arr = col.getJSONArray("data");
+				for (int i = 0; i < arr.length(); i++)
+				{
+					String jsonRowTemp = "{\n" + "   \"row\": " + arr.get(i).toString() + "}";
+					JSONObject row = new JSONObject(jsonRowTemp);
+					JSONArray rowArr = row.getJSONArray("row");
+					ArrayList<String> tempGraphData = new ArrayList<String>();
+					for (int j = 0; j < rowArr.length(); j++)
+					{
+						String tempItem = rowArr.get(j).toString();
+						tempItem = tempItem.replaceAll("/", "-");
+						tempGraphData.add(tempItem);
+					}
+					teamGraphData.add(tempGraphData);
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+						
 		}
 	}
 		
@@ -182,19 +221,12 @@ public class processScores {
 		return teamImages;
 	}
 	
+	public ArrayList<ArrayList<String>> getGraphData() {
+		return teamGraphData;
+	}
+	
 	public HashMap<String, Team> getMain() {
 		return scoreboard;
 	}
 	
-	public static void main(String[] args) {
-		processScores p = null;
-		try {
-			p = new processScores("");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
- 
 }

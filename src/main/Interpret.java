@@ -3,6 +3,7 @@ package main;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import org.json.*;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -15,10 +16,6 @@ public class Interpret extends HttpServlet {
 	private String command;
 	private PrintWriter writer = null;
 	private processScores p = null;
-	//private int team1Start = 0;
-	//private int team2Start = 0;
-	//private String tID1 = null;
-	//private String tID2 = null;
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -74,7 +71,7 @@ public class Interpret extends HttpServlet {
 					+ "</html>");
 		}
 		else {
-			p = new processScores(getServletContext().getRealPath(""));
+			p = new processScores(getServletContext().getRealPath(""), false);
 			this.printOut();
 		}
 	}
@@ -84,7 +81,7 @@ public class Interpret extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		p = new processScores(getServletContext().getRealPath(""));
+		p = new processScores(getServletContext().getRealPath(""), false);
 		writer = response.getWriter();
 		command = request.getParameter("commandIn");
 		this.printOut();
@@ -102,6 +99,7 @@ public class Interpret extends HttpServlet {
 		}
 		else {			
 	        TreeMap<String, ArrayList<String>> tempImages = null;
+	        ArrayList<ArrayList<String>> tempGraphData = null;
 
 			if(command.contains("!team")) {
 				TreeMap<String, Team> sorted_map = null;
@@ -163,8 +161,86 @@ public class Interpret extends HttpServlet {
 				}
 				writer.println("</tbody>");
 				writer.println("</table>");
-				writer.println("</div></div></div></div></div></div></div>");
-
+				writer.println("</div></div></div>");
+				
+				writer.println("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js\"></script>");
+				
+				writer.println("<div class=\"card text-white bg-primary mb-3\">\n" + 
+						"  <div class=\"card-header\">Image Score Graph</div>\n" + 
+						"  <div class=\"card-body card-whiteback\">\n" +
+						"  <canvas id=\"canvas\"></canvas>" +
+						"  </div>\n" + 
+						"</div>");
+				writer.println("</div></div></div></div>");
+				
+				tempGraphData = p.getGraphData();
+				ArrayList<String> headerRowGraph = tempGraphData.get(0);
+				tempGraphData.remove(0);
+				String innerData = "";
+				
+				for(int j=1; j<headerRowGraph.size(); j++) {
+				innerData = innerData + "{\n" +						
+				"      label: '" + headerRowGraph.get(j) + "',\n" +
+				//"      backgroundColor: 'black',\n" + 
+				"      borderColor: 'black',\n" + 
+				"      fill: false,\n" + 
+				"      data: [\n";
+				for(int h=0; h<tempGraphData.size(); h++) {
+					innerData = innerData + "{ x: '0000-"+ tempGraphData.get(h).get(0) +"', y:'" + tempGraphData.get(h).get(j) + "'}, \n";
+				}
+				innerData = innerData + "      ]\n" + "    },";
+				}
+				
+				writer.println("<script>"
+						+ "var colorArray = [\n" + 
+						"    'red',\n" + 
+						"    'green',\n" + 
+						"    'blue',\n" + 
+						"    'black'\n" + 
+						"];\n"
+						+ "new Chart(document.getElementById('canvas'), {\n" + 
+						"  type: 'line',\n" + 
+						"  data: {\n" + 
+						"    datasets: ["
+						+ innerData +
+						"]\n" + 
+						"  },\n" + 
+						"  options: {\n" + 
+						"    title: {\n" + 
+						"      text: 'Time Scale'\n" + 
+						"    },\n" +
+						"    animation: {\n" + 
+						"        duration: 0\n" + 
+						"    }," + 
+						"    scales: {\n" + 
+						"      xAxes: [{\n" + 
+						"        type: 'time',\n" +
+						"        ticks: {\n" + 
+						"            autoSkip: true,\n" + 
+						"            maxTicksLimit: 20\n" + 
+						"        }," + 
+						"        time: {\n" + 
+						"          unit: 'hour',\n" + 
+						"          displayFormats: {\n" + 
+						"            hour: 'MM/DD HH:mm'\n" + 
+						"          },\n" + 
+						"          tooltipFormat: 'MMM DD HH:mm'\n" + 
+						"        },\n" + 
+						"        scaleLabel: {\n" + 
+						"          display: true,\n" + 
+						"          labelString: 'Date/Time'\n" + 
+						"        }\n" + 
+						"      }],\n" + 
+						"      yAxes: [{\n" + 
+						"        display: true,\n" + 
+						"        scaleLabel: {\n" + 
+						"          display: true,\n" + 
+						"          labelString: 'Score'\n" + 
+						"        }\n" + 
+						"      }]\n" + 
+						"    },\n" + 
+						"  }\n" + 
+						"});</script>");
 				
 				writer.println("</body>");
 				writer.println("</html>");
@@ -209,6 +285,7 @@ public class Interpret extends HttpServlet {
 					}
 				}
 				catch (Exception e) {
+					e.printStackTrace();
 					writer.println("<html>");
 					writer.println("<head>" + "<link rel=\"stylesheet\" href=\"bootstrap.css\">\n" + 
 							"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>\n" + 
@@ -360,8 +437,9 @@ public class Interpret extends HttpServlet {
 				+ "<link href=\"https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css\" rel=stylesheet>\n" + 
 				"<script src=\"https://code.jquery.com/jquery-3.5.1.js\"></script>\n" + 
 				"<script src=\"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js\"></script>\n" + 
-				"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>"
-				+ "</head>");
+				"<script src=\"https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js\"></script>\n" +
+				"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js\"></script>\n" +
+				"</head>");
 		writer.println("<body>");
 		writer.println("<script>\n" + 
 				"$(document).ready(function() {\n" + 
